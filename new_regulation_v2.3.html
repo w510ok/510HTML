@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新《供水条例》2026影响对照 v2.1 · 江南AI工作小组</title>
+<style>
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f2;
+  --color-background-info: #e6f1fb;
+  --color-background-danger: #fcebeb;
+  --color-background-warning: #faeeda;
+  --color-background-success: #eaf3de;
+  --color-text-primary: #1a1a18;
+  --color-text-secondary: #5f5e5a;
+  --color-text-tertiary: #9a9a94;
+  --color-text-info: #0c447c;
+  --color-text-danger: #a32d2d;
+  --color-text-warning: #633806;
+  --color-text-success: #27500a;
+  --color-border-tertiary: rgba(0,0,0,0.10);
+  --color-border-secondary: rgba(0,0,0,0.18);
+  --color-border-info: rgba(24,95,165,0.35);
+  --color-border-danger: rgba(226,75,74,0.35);
+  --color-border-warning: rgba(186,117,23,0.35);
+  --color-border-success: rgba(59,109,17,0.35);
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --font-sans: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  --font-mono: 'SF Mono','Consolas','Courier New',monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-primary: #2a2a28;
+    --color-background-secondary: #222220;
+    --color-background-info: #0b2d4a;
+    --color-background-danger: #2e1010;
+    --color-background-warning: #2a1e08;
+    --color-background-success: #0e2008;
+    --color-text-primary: #eaeae6;
+    --color-text-secondary: #9a9a94;
+    --color-text-tertiary: #5a5a56;
+    --color-text-info: #85b7eb;
+    --color-text-danger: #f09595;
+    --color-text-warning: #fac775;
+    --color-text-success: #c0dd97;
+    --color-border-tertiary: rgba(255,255,255,0.10);
+    --color-border-secondary: rgba(255,255,255,0.18);
+    --color-border-info: rgba(133,183,235,0.35);
+    --color-border-danger: rgba(240,149,149,0.35);
+    --color-border-warning: rgba(250,199,117,0.35);
+    --color-border-success: rgba(192,221,151,0.35);
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 20px;
+}
+button { font-family: var(--font-sans); cursor: pointer; transition: all .15s; }
+button:active, button:focus { opacity: .85; outline: 2px solid #a6bcfa; }
+
+.header {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.alert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-text-danger); flex-shrink: 0; }
+.header-title { font-size: 14px; font-weight: 500; color: var(--color-text-danger); }
+.header-meta { font-size: 11px; color: var(--color-text-secondary); white-space: nowrap; margin-left: auto; }
+
+.stats-row { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; margin-bottom: 14px; }
+.stat-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px; text-align: center; }
+.stat-num { font-size: 1.6rem; font-weight: 500; }
+.stat-lbl { font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 2px; }
+
+.filter-row { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+.filter-lbl { font-size: 12px; color: var(--color-text-secondary); }
+.fbtn { padding: 4px 12px; border-radius: 16px; font-size: 12px; border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); }
+.fbtn.on { background: var(--color-text-primary); color: var(--color-background-primary); border-color: var(--color-text-primary); }
+.fbtn.fbtn-d { border-color: var(--color-border-danger); color: var(--color-text-danger); }
+.fbtn.fbtn-w { border-color: var(--color-border-warning); color: var(--color-text-warning); }
+.count-lbl { margin-left: auto; font-size: 12px; color: var(--color-text-secondary); }
+
+.change-card { background: var(--color-background-primary); border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: 8px; }
+.change-card-danger { border-color: var(--color-border-danger) !important; }
+.change-card-warning { border-color: var(--color-border-warning) !important; }
+.change-card-tertiary { border-color: var(--color-border-tertiary) !important; }
+
+.change-head { 
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px; width: 100%; border: none; background: none; cursor: pointer;
+  text-align: left;
+}
+.change-head:hover, .change-head:focus { background: var(--color-background-secondary); }
+.badge { display: inline-block; font-size: 10px; padding: 1px 7px; border-radius: 9px; white-space: nowrap; font-weight: 500; }
+.b-must { background: var(--color-background-danger); color: var(--color-text-danger); border: 0.5px solid var(--color-border-danger); }
+.b-suggest { background: var(--color-background-warning); color: var(--color-text-warning); border: 0.5px solid var(--color-border-warning); }
+.b-improve { background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-secondary); }
+.change-art { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); white-space: nowrap; }
+.change-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
+.change-toggle { font-size: 12px; color: var(--color-text-tertiary); white-space: nowrap; }
+
+.change-body { display: none; padding: 0 14px 14px; border-top: 0.5px solid var(--color-border-tertiary); }
+
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+@media (max-width: 540px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-box { border-radius: var(--border-radius-md); padding: 9px 10px; font-size: 12px; line-height: 1.7; }
+.compare-lbl { font-size: 10px; font-weight: 500; margin-bottom: 5px; padding: 2px 8px; border-radius: 5px; display: inline-block; }
+
+.contract-box { background: var(--color-background-warning); border-radius: var(--border-radius-md); padding: 9px 10px; margin-top: 8px; }
+.contract-lbl { font-size: 10px; font-weight: 500; color: var(--color-text-warning); margin-bottom: 3px; }
+.contract-txt { font-size: 12px; color: var(--color-text-warning); line-height: 1.7; }
+.risk-note { font-size: 11px; color: var(--color-text-danger); margin-top: 7px; }
+
+/* ── 提示词弹出层 ── */
+.prompt-overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-info);
+  border-radius: var(--border-radius-lg);
+  padding: 12px 14px;
+  margin-top: 10px;
+  z-index: 10;
+}
+.prompt-overlay.open { display: block; }
+.prompt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.prompt-title { font-size: 12px; font-weight: 500; color: var(--color-text-info); }
+.prompt-close { font-size: 16px; color: var(--color-text-tertiary); background: transparent; border: none; padding: 0 4px; line-height: 1; }
+.prompt-desc { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 8px; line-height: 1.6; }
+.prompt-box {
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-bottom: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.prompt-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn-copy {
+  padding: 6px 16px; font-size: 12px; font-weight: 500;
+  background: var(--color-text-info); color: var(--color-background-primary);
+  border: none; border-radius: var(--border-radius-md);
+}
+.btn-copy.copied { background: var(--color-text-success); }
+.btn-outline {
+  padding: 6px 14px; font-size: 12px;
+  border: 0.5px solid var(--color-border-secondary);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border-radius: var(--border-radius-md);
+}
+.prompt-hint { font-size: 11px; color: var(--color-text-tertiary); line-height: 1.5; }
+
+.gen-btn {
+  margin-top: 10px;
+  font-size: 12px; font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-info);
+  border: 0.5px solid var(--color-border-info);
+  background: var(--color-background-info);
+  display: flex; align-items: center; gap: 5px;
+}
+.gen-btn-ico { font-size: 14px; }
+
+.card-relative { position: relative; }
+
+.footer { margin-top: 16px; text-align: center; font-size: 11px; color: var(--color-text-tertiary); line-height: 1.8; }
+</style>
+</head>
+<body>
+<header class="header" role="banner">
+  <div style="display:flex;align-items:center;gap:10px;flex:1">
+    <span class="alert-dot"></span>
+    <span class="header-title">新《供水条例》（国务院令第831号）· 2026年6月1日施行 · 同日废止1994年版《城市供水条例》</span>
+  </div>
+  <span class="header-meta" id="days-badge">载入中…</span>
+</header>
+<main>
+  <nav aria-label="筛选">
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">8章50条</div>
+      <div class="stat-lbl">全新结构体例</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--color-text-danger)">6处</div>
+      <div class="stat-lbl">合同必须同步修订</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--color-text-warning)">城乡扩展</div>
+      <div class="stat-lbl">涵盖农村规模化供水</div>
+    </div>
+  </div>
+
+  <div class="filter-row">
+    <span class="filter-lbl">筛选：</span>
+    <button class="fbtn on" data-filter="all" type="button">全部</button>
+    <button class="fbtn fbtn-d" data-filter="high" type="button">必须修订</button>
+    <button class="fbtn fbtn-w" data-filter="mid" type="button">建议更新</button>
+    <button class="fbtn" data-filter="low" type="button">补充完善</button>
+    <span class="count-lbl" id="count-lbl">共 0 条</span>
+  </div>
+  </nav>
+  <section id="change-list" aria-label="变更列表"></section>
+</main>
+<footer class="footer">
+  © 2026 江南AI工作小组 · 江苏江南水务股份有限公司（601199）<br>
+  依据新《供水条例》（国务院令第831号）构建 · <br>
+  提示词可直接用于企业微信DeepSeek/法务AI助手
+</footer>
+
+<script>
+function escapeHTML(str) {
+  return String(str ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+const IDENTITY = `你是江苏江南水务股份有限公司（上市公司，股票代码601199）的资深法务顾问。严格依据新《供水例》（国务院令第831号，2026年6月1日施行）提供合同修订建议，不得超出条文法律责任和公司管理实际，所有条款建议须注明法律依据与适用合同类型。`;
+const changes = [
+  {
+    level:'high', article:'第23条',
+    topic:'停水通知时限：须提前24小时',
+    old:'旧条例：无明确小时数规定，行业惯例约48小时',
+    new_rule:'新条例：计划停水须提前24小时公告或书面通知，重大停水需报批，紧急停水同步通知，消防需提前通告。',
+    contract:'合同须同步约定：停水需提前24小时（两种通知方式），重大停水须报批，纳入合同触发标准，消防提前通知。',
+    risk:'如合同仍写48小时，6月1日后将违法，须提前全部修订。',
+    prompt_suffix:`请依据新《供水条例》第23条（2026年6月1日施行）起草居民用水合同“停水通知”条款，完整包含：1.计划停水：提前24小时官网公告或书面/电子通知；2.重大停水报批并临时供水；3.紧急停水同步通知和报告主管部门；4.消防停水提前通知消防机构。条款末注明法律依据。`,
+    prompt_note:'适用于：居民标准合同批量修订 / 新合同签订'
+  },
+  {
+    level:'high', article:'第21条',
+    topic:'水质检测：供水单位法定务强化',
+    old:'旧条例：水质检测要求较为原则性。',
+    new_rule:'新条例：按国家标准周期检测原水/出厂水/管网水，发现异常须及时报告和公告。',
+    contract:'合同须引用：水质国标GB 5749-2022，增加用户查询权与异常通报时限。',
+    risk:'水质公告信息同步涉及信息公开个人信息保护法适配。',
+    prompt_suffix:`请依据新《供水条例》第21条起草供用水合同“水质保障与责任边界”条款，包括：1.供水方承诺出厂及管网水质达标（GB 5749-2022）；2.水表前后水质责任分界；3.水质异常4小时内通报及处置；4.用水方年度报告查询权。如为工商合同，加注生产特殊用水要求自理。`,
+    prompt_note:'适用于：居民合同水质条款 / 工商水质责任'
+  },
+  {
+    level:'mid', article:'第25条',
+    topic:'水费缴纳：以计量器具数据为准',
+    old:'旧条例：未明“计量数据”的法律地位。',
+    new_rule:'新条例：应以结算水表（经检定）数据为缴费依据，农村按约定。',
+    contract:'合同明确：以供水表数据作为结算依归，提供计量争议处理流程。',
+    risk:'未约定结算表，后期欠费纠纷举证难度大。',
+    prompt_suffix:`请依据新《供水条例》第25条起草供用水合同“计量与水费结算”条款：1.以供水方检定合格的结算水表数据计费；2.抄表周期与用户配合；3.故障时估算规则；4.计量异议程序（建议到账单10日内）；5.水表维护责任。`,
+    prompt_note:'适用于：居民/工商合同计量结算修订'
+  },
+  {
+    level:'mid', article:'第26条',
+    topic:'水价机制：阶梯水价法定化',
+    old:'旧条例：无明文阶梯/超定额规定。',
+    new_rule:'新条例：居民用水实行阶梯水价，非居民超额累加，政府调价需合同自动适应。',
+    contract:'合同须：用水性质勾选，水价标准引用政府定价，用水性质变更自动切换水价。',
+    risk:'工商如协议单价，易规避超定额加价，必须修订。',
+    prompt_suffix:`请依据新《供水条例》第26条起草“水费计收与水价适用”条款，包括：1.用水性质确认（□居民□非居民）；2.水费随结算表与政府定价计算（不得协定单价）；3.政府调价自动适用；4.用水性质变需申请；5.逾期滞纳金（建议：日万分之五）。工商合同请注明：不得主张固定单价免责加价条款。`,
+    prompt_note:'适用于：居民/工商水价条款规范'
+  },
+  {
+    level:'low', article:'第27条',
+    topic:'投诉处理：建立机制成法定义务',
+    old:'旧条例：无明确投诉机制。',
+    new_rule:'新条例：供水单位须建立投诉机制，7日内处理，用户可向主管部门投诉。',
+    contract:'合同须：明确投诉响应/处理时限，升级投诉路径和合同争议管辖。',
+    risk:'重大投诉需同步纳入上市公司信息披露体系，否则有监管风险。',
+    prompt_suffix:`请依据新《供水条例》第27条起草“投诉与争议解决”条款，包括：1.供水服务投诉机制（24小时响应、7日回复）；2.不满可向主管投诉；3.协商不成由南京市区法院管辖；4.适用中华人民共和国法律。条款末注明“与本公司营业规则第六章衔接”。`,
+    prompt_note:'适用于：居民/工商合同争议解决条款'
+  }
+];
+const lvl = {'high':'danger', 'mid':'warning', 'low':'tertiary'};
+const lbl = {'high':'必须修订','mid':'建议更新','low':'补充完善'};
+const bcls = {'high':'b-must','mid':'b-suggest','low':'b-improve'};
+let cur = 'all';
+let openPrompt = null;
+function calcDays() {
+  const now = new Date();
+  const tgt = new Date(Date.UTC(2026,5,1)); // 6月是5
+  const diff = Math.ceil((tgt - now) / 86400000);
+  const el = document.getElementById('days-badge');
+  el.textContent = diff>0 ? `距今 ${diff} 天（${tgt.toLocaleDateString('zh-CN')}）` : '已施行';
+}
+calcDays();
+function render() {
+  const filtered = cur === 'all' ? changes : changes.filter(c => c.level === cur);
+  document.getElementById('count-lbl').textContent = `共 ${filtered.length} 条`;
+  const list = document.getElementById('change-list');
+  list.innerHTML = '';
+  filtered.forEach((c, i) => {
+    const card = document.createElement('div');
+    card.className = `change-card card-relative change-card-${lvl[c.level]}`;
+    card.style.border = `0.5px solid var(--color-border-${lvl[c.level]})`;
+    const head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'change-head';
+    head.setAttribute('aria-expanded','false');
+    head.setAttribute('data-index', i);
+    head.innerHTML = `<span class="badge ${bcls[c.level]}">${lbl[c.level]}</span>
+      <span class="change-art">${escapeHTML(c.article)}</span>
+      <span class="change-title">${escapeHTML(c.topic)}</span>
+      <span class="change-toggle" id="arr${i}">▸ 展开</span>`;
+    card.appendChild(head);
+    const body = document.createElement('div');
+    body.className = 'change-body';
+    body.id = `det${i}`;
+    body.setAttribute('role','region');
+    body.setAttribute('aria-labelledby', `arr${i}`);
+    body.innerHTML =
+      `<div class="compare-grid">
+        <div class="compare-box" style="background:var(--color-background-secondary)">
+          <div class="compare-lbl" style="background:var(--color-background-secondary);color:var(--color-text-secondary)">旧条例</div>
+          <div style="font-size:12px;color:var(--color-text-primary)">${escapeHTML(c.old)}</div>
+        </div>
+        <div class="compare-box" style="background:var(--color-background-info)">
+          <div class="compare-lbl" style="background:var(--color-background-info);color:var(--color-text-info)">新条例规定</div>
+          <div style="font-size:12px;color:var(--color-text-info)">${escapeHTML(c.new_rule)}</div>
+        </div>
+      </div>
+      <div class="contract-box">
+        <div class="contract-lbl">合同修订要点</div>
+        <div class="contract-txt">${escapeHTML(c.contract)}</div>
+      </div>
+      <div class="risk-note">${escapeHTML(c.risk)}</div>
+      <button class="gen-btn" data-prompt="${i}" type="button">
+        <span class="gen-btn-ico">⬡</span> 生成修订提示词
+      </button>
+      <div class="prompt-overlay" id="po${i}">
+        <div class="prompt-header">
+          <div class="prompt-title">修订提示词 · ${escapeHTML(c.article)} ${escapeHTML(c.topic)}</div>
+          <button class="prompt-close" data-closeprompt="${i}" aria-label="关闭提示词">×</button>
+        </div>
+        <div class="prompt-desc">复制提示词 → 粘贴至企业微信DeepSeek或法务AI助手 → 直接获得可用合同条款文字</div>
+        <div class="prompt-box" id="pb${i}"></div>
+        <div class="prompt-actions">
+          <button class="btn-copy" id="cb${i}" data-copyprompt="${i}">复制提示词</button>
+          <button class="btn-outline" data-closeprompt="${i}">关闭</button>
+          <span class="prompt-hint" id="ph${i}">适用场景：${escapeHTML(c.prompt_note)}</span>
+        </div>
+      </div>
+      `;
+    card.appendChild(body);
+    list.appendChild(card);
+  });
+}
+render();
+document.body.addEventListener('click', function(e) {
+  const t = e.target;
+  if (t.matches('.fbtn')) {
+    cur = t.getAttribute('data-filter');
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+    t.classList.add('on');
+    render();
+    openPrompt = null;
+    return;
+  }
+  if (t.matches('.change-head')) {
+    const i = t.getAttribute('data-index');
+    togPanel(i, t);
+    return;
+  }
+  if (t.matches('.gen-btn')) {
+    const i = t.getAttribute('data-prompt');
+    showPrompt(i);
+    return;
+  }
+  if (t.matches('.prompt-close') || t.classList.contains('btn-outline')) {
+    const i = t.getAttribute('data-closeprompt');
+    hidePrompt(i);
+    return;
+  }
+  if (t.classList.contains('btn-copy')) {
+    const i = t.getAttribute('data-copyprompt');
+    copyPrompt(i);
+    return;
+  }
+});
+function togPanel(i, btn) {
+  const d = document.getElementById('det' + i);
+  const a = document.getElementById('arr' + i);
+  if (!d) return;
+  const open = d.style.display === 'block';
+  d.style.display = open ? 'none' : 'block';
+  btn.setAttribute('aria-expanded', open ? 'false':'true');
+  a.textContent = open ? '▸ 展开' : '▾ 收起';
+  if (open && openPrompt === i) { hidePrompt(i); openPrompt = null; }
+}
+function showPrompt(i) {
+  if (openPrompt !== null && openPrompt !== i) hidePrompt(openPrompt);
+  const c = changes[i];
+  const full = `${IDENTITY}\n\n${c.prompt_suffix}`;
+  const el = document.getElementById('pb' + i);
+  if (el) el.textContent = full;
+  const po = document.getElementById('po' + i);
+  if (po) po.classList.add('open');
+  openPrompt = i;
+}
+function hidePrompt(i) {
+  const po = document.getElementById('po' + i);
+  if (po) po.classList.remove('open');
+  const cb = document.getElementById('cb' + i);
+  if (cb) { cb.textContent = '复制提示词'; cb.classList.remove('copied'); }
+  if (openPrompt === i) openPrompt = null;
+}
+function copyPrompt(i) {
+  const c = changes[i];
+  const text = `${IDENTITY}\n\n${c.prompt_suffix}`;
+  const cb = document.getElementById('cb'+i);
+  function cbDone() {
+    if (cb) {
+      cb.textContent = '已复制 ✓';
+      cb.classList.add('copied');
+      setTimeout(() => {
+        cb.textContent = '复制提示词';
+        cb.classList.remove('copied');
+      }, 2000);
+    }
+  }
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(cbDone, function(){fallbackCopy(text); cbDone();});
+  } else {
+    fallbackCopy(text); cbDone();
+  }
+}
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.position = 'absolute'; ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+}
+</script>
+</body>
+</html>
