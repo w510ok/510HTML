@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>江苏江南水务｜专业调度系统员工岗位移动驾驶舱演练脚本 Demo</title>
+  <style>
+    :root{
+      --bg:#07131d;
+      --bg2:#0b2032;
+      --card:#10283e;
+      --card2:#13324e;
+      --line:rgba(147,194,230,.16);
+      --line2:rgba(147,194,230,.28);
+      --text:#eff6ff;
+      --muted:#9bb5c9;
+      --blue:#45adff;
+      --cyan:#53dbff;
+      --green:#35d596;
+      --yellow:#ffcf59;
+      --orange:#ff9c48;
+      --red:#ff6d6d;
+      --purple:#948cff;
+      --shadow:0 12px 36px rgba(0,0,0,.34);
+      --radius:20px;
+      --font:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(circle at top,#14385a 0,#081623 45%,#040b12 100%);color:var(--text);font-family:var(--font)}
+    body{min-height:100vh}
+    .wrap{max-width:1180px;margin:0 auto;padding:20px 16px 36px}
+    .hero{padding:20px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(180deg,rgba(16,40,62,.96),rgba(8,22,34,.98));box-shadow:var(--shadow)}
+    .hero-top{display:flex;gap:18px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+    .brand{display:flex;gap:14px;align-items:flex-start;min-width:0}
+    .logo{width:54px;height:54px;border-radius:16px;background:linear-gradient(180deg,#64d8ff,#2587db);display:grid;place-items:center;flex:0 0 auto}
+    .logo svg{width:28px;height:28px}
+    h1{margin:6px 0 8px;font-size:30px;line-height:1.15}
+    .sub{color:var(--muted);font-size:14px;line-height:1.8;max-width:780px}
+    .badges,.legend,.switches,.quick{display:flex;gap:8px;flex-wrap:wrap}
+    .badge,.mini,.legend span,.status-pill,.tag{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--line2);font-size:12px}
+    .badge{background:rgba(69,173,255,.12)}
+    .mini{cursor:pointer;background:#143351;color:var(--text)}
+    .mini.active{background:linear-gradient(180deg,#167ccb,#0f5e9f);border-color:#62c8ff}
+    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-top:18px}
+    .card{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(16,40,62,.98),rgba(11,28,43,.98));box-shadow:var(--shadow)}
+    .card-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .title{font-size:16px;font-weight:800}
+    .desc{margin-top:4px;color:var(--muted);font-size:12px;line-height:1.7}
+    .card-body{padding:16px}
+    .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .metric{padding:12px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--line);position:relative;overflow:hidden}
+    .metric:after{content:"";position:absolute;right:-22px;top:-22px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(83,219,255,.18),rgba(83,219,255,0) 70%)}
+    .metric .k{font-size:11px;color:var(--muted)}
+    .metric .v{margin-top:8px;font-size:26px;font-weight:800}
+    .metric .n{margin-top:6px;font-size:11px;line-height:1.6;color:#d8ebfb}
+
+    .hero-svg{width:100%;height:auto;display:block;border-radius:18px;border:1px solid rgba(255,255,255,.22);background:linear-gradient(180deg,#163b5d,#0b2031)}
+    .script-glance{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .info-tile{padding:14px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
+    .info-tile strong{display:block;margin-bottom:6px;font-size:14px}
+    .info-tile div{font-size:12px;line-height:1.75;color:#d8e9f8}
+
+    .section{margin-top:16px}
+    .panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .table{width:100%;border-collapse:collapse;font-size:12px}
+    .table th,.table td{padding:11px 10px;vertical-align:top;border-bottom:1px solid var(--line)}
+    .table th{color:#cfe8fb;font-weight:700;text-align:left;background:rgba(255,255,255,.02)}
+    .table td{color:#d9ebf9;line-height:1.7}
+    .table tr:last-child td{border-bottom:none}
+    .lv-blue{color:#d4eeff;background:rgba(69,173,255,.14)}
+    .lv-yellow{color:#fff0be;background:rgba(255,207,89,.12)}
+    .lv-orange{color:#ffe0c5;background:rgba(255,156,72,.12)}
+    .lv-red{color:#ffd7d7;background:rgba(255,109,109,.12)}
+    .lv-green{color:#d1ffea;background:rgba(53,213,150,.12)}
+    .lv-purple{color:#e4ddff;background:rgba(148,140,255,.14)}
+    .scenario-tag{font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid var(--line2);display:inline-flex;align-items:center;gap:5px}
+
+    .scenario-list{display:grid;gap:12px}
+    .scenario-card{padding:14px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line);cursor:pointer;transition:.18s transform,.18s border-color,.18s background}
+    .scenario-card:hover{transform:translateY(-2px)}
+    .scenario-card.active{border-color:#67cbff;background:rgba(69,173,255,.08)}
+    .scenario-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+    .scenario-title{font-size:15px;font-weight:800;line-height:1.45}
+    .scenario-meta{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.7}
+    .progress{margin-top:10px;height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+    .progress>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+    .progress-note{margin-top:6px;font-size:11px;color:#d9ebf9}
+
+    .timeline{display:grid;gap:10px}
+    .step{padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--line);position:relative}
+    .step:before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.08)}
+    .step:first-child:before{top:50%}
+    .step:last-child:before{bottom:50%}
+    .step-inner{position:relative;padding-left:22px}
+    .dot{position:absolute;left:9px;top:15px;width:16px;height:16px;border-radius:50%;border:3px solid rgba(255,255,255,.12);background:#234767}
+    .step.done .dot{background:var(--green);border-color:rgba(53,213,150,.25)}
+    .step.active .dot{background:var(--yellow);border-color:rgba(255,207,89,.3)}
+    .step .time{font-size:11px;color:var(--muted)}
+    .step .txt{margin-top:4px;font-size:13px;line-height:1.7}
+
+    .role-grid,.flow-grid,.focus-grid,.score-grid,.sop-grid,.shot-grid{display:grid;gap:12px}
+    .role-grid{grid-template-columns:repeat(3,1fr)}
+    .flow-grid{grid-template-columns:repeat(4,1fr)}
+    .focus-grid{grid-template-columns:repeat(3,1fr)}
+    .score-grid{grid-template-columns:repeat(4,1fr)}
+    .sop-grid{grid-template-columns:repeat(2,1fr)}
+    .shot-grid{grid-template-columns:repeat(2,1fr)}
+    .role-card,.flow-card,.focus-card,.score-card,.sop-card,.shot{padding:14px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+    .role-card h3,.flow-card h3,.focus-card h3,.sop-card h3,.shot h3{margin:0 0 8px;font-size:15px}
+    .role-card ul,.focus-card ul,.sop-card ul{margin:0;padding-left:18px}
+    .role-card li,.focus-card li,.sop-card li{margin:7px 0;color:#d9ebf9;font-size:12px;line-height:1.7}
+    .flow-card p,.shot p{margin:0;color:#d9ebf9;font-size:12px;line-height:1.8}
+    .flow-visual{height:120px;margin-bottom:10px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(69,173,255,.08),rgba(255,255,255,.02));display:grid;place-items:center;overflow:hidden}
+    .score-card .num{font-size:30px;font-weight:800;margin-top:8px}
+    .score-card .k{font-size:12px;color:var(--muted)}
+    .score-card .n{margin-top:6px;font-size:11px;color:#d8ebfb;line-height:1.6}
+
+    .mock-phone{max-width:270px;margin:0 auto;height:265px;border-radius:24px;padding:10px;background:linear-gradient(180deg,#101822,#04090f);box-shadow:0 12px 28px rgba(0,0,0,.42)}
+    .mock-screen{height:100%;border-radius:18px;padding:12px;background:linear-gradient(180deg,#11314d,#081825);border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
+    .mock-header{font-size:11px;color:#cfe6f9;display:flex;justify-content:space-between;gap:10px}
+    .mock-alert{margin-top:10px;padding:9px 10px;border-radius:12px;font-size:11px;line-height:1.5;border:1px solid rgba(255,255,255,.12)}
+    .mock-block{margin-top:10px;padding:9px 10px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+    .mock-row{display:flex;gap:7px;align-items:center;justify-content:space-between;margin-top:7px}
+    .bar{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;flex:1}
+    .bar span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:999px}
+
+    .footer-note{padding:14px 16px;border-top:1px solid var(--line);font-size:12px;line-height:1.8;color:var(--muted)}
+
+    .foot-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;border:1px solid var(--line2);background:#143351;color:var(--text);text-decoration:none;font-size:13px}
+
+    @media (max-width: 980px){
+      .grid,.panel-grid,.role-grid,.flow-grid,.focus-grid,.score-grid,.sop-grid,.shot-grid{grid-template-columns:1fr}
+      .summary-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .wrap{padding:14px 10px 28px}
+      h1{font-size:24px}
+      .summary-grid,.script-glance{grid-template-columns:1fr}
+      .card-head{padding:12px 13px}
+      .card-body{padding:13px}
+      .table{font-size:11px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 13c3.4 0 5.8-4 8-4 2.2 0 4.6 4 8 4-1.8 3.7-4.8 6-8 6s-6.1-2.3-8-6Z" fill="#fff" opacity=".96"/>
+              <path d="M4 11c2.8 0 4.1-4 8-4 3.9 0 5.2 4 8 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="badges">
+              <span class="badge">HTML 单文件</span>
+              <span class="badge">图文并茂</span>
+              <span class="badge">培训演练专用</span>
+              <span class="badge">不替代正式生产系统</span>
+            </div>
+            <h1>江苏江南水务｜专业调度系统员工岗位移动驾驶舱演练脚本</h1>
+            <div class="sub">用于班组培训、桌面推演、岗位带教和复盘评分。脚本围绕“领导版 / 总值班版 / 泵站值守版”三类岗位界面展开，覆盖场景分类、推演进度、四个流程页、案例复盘、岗位 SOP、培训关注点与评分要点，更适合内部值班体系训练。</div>
+          </div>
+        </div>
+        <div class="quick">
+          <span class="status-pill lv-green">建议用途：班组演练 / 带教讲解</span>
+          <span class="status-pill lv-blue">脚本版本：V1.0 Demo</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="title">演练总览</div>
+              <div class="desc">建议把“脚本 + 演示系统 + 评分表”配套使用，形成可讲、可演、可评、可复盘的闭环</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="summary-grid">
+              <div class="metric"><div class="k">演练分类</div><div class="v">3 类</div><div class="n">暴雨顶托 / 台风断电 / 原水异常</div></div>
+              <div class="metric"><div class="k">岗位界面</div><div class="v">3 套</div><div class="n">领导版 / 总值班版 / 泵站值守版</div></div>
+              <div class="metric"><div class="k">流程页</div><div class="v">4 页</div><div class="n">派单 / 签到 / 拍照 / 评分</div></div>
+              <div class="metric"><div class="k">建议时长</div><div class="v">45-90</div><div class="n">分钟 / 场，分桌推或联演两种节奏</div></div>
+            </div>
+            <div style="margin-top:14px">
+              <svg class="hero-svg" viewBox="0 0 780 270" aria-label="演练脚本总流程示意图">
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#45adff"/>
+                    <stop offset="100%" stop-color="#53dbff"/>
+                  </linearGradient>
+                  <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#ffcf59"/>
+                    <stop offset="100%" stop-color="#ff9c48"/>
+                  </linearGradient>
+                </defs>
+                <rect x="16" y="18" rx="16" ry="16" width="188" height="234" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="34" y="48" fill="#eff6ff" font-size="18" font-weight="700">场景分类</text>
+                <rect x="34" y="70" rx="12" width="150" height="38" fill="rgba(69,173,255,.14)" stroke="rgba(69,173,255,.3)"/>
+                <text x="48" y="94" fill="#dff3ff" font-size="14">A 梅雨暴雨 + 顶托</text>
+                <rect x="34" y="118" rx="12" width="150" height="38" fill="rgba(255,109,109,.12)" stroke="rgba(255,109,109,.3)"/>
+                <text x="48" y="142" fill="#ffe5e5" font-size="14">B 台风 + 外电中断</text>
+                <rect x="34" y="166" rx="12" width="150" height="38" fill="rgba(255,207,89,.12)" stroke="rgba(255,207,89,.28)"/>
+                <text x="48" y="190" fill="#fff4cf" font-size="14">C 原水异常 + 报障</text>
+                <text x="34" y="226" fill="#9bb5c9" font-size="12">对应复合灾害、岗位闭环、公众联动 3 类训练主轴</text>
+
+                <rect x="220" y="18" rx="16" ry="16" width="168" height="234" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="238" y="48" fill="#eff6ff" font-size="18" font-weight="700">岗位界面</text>
+                <circle cx="270" cy="92" r="22" fill="url(#g1)"/><text x="260" y="98" fill="#fff" font-size="18">L</text>
+                <text x="304" y="98" fill="#dff3ff" font-size="14">领导版看态势、看决策</text>
+                <circle cx="270" cy="140" r="22" fill="url(#g1)"/><text x="258" y="146" fill="#fff" font-size="18">D</text>
+                <text x="304" y="146" fill="#dff3ff" font-size="14">总值班看事件、看派单</text>
+                <circle cx="270" cy="188" r="22" fill="url(#g1)"/><text x="260" y="194" fill="#fff" font-size="18">P</text>
+                <text x="304" y="194" fill="#dff3ff" font-size="14">泵站岗看设备、看回传</text>
+
+                <rect x="404" y="18" rx="16" ry="16" width="172" height="234" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="422" y="48" fill="#eff6ff" font-size="18" font-weight="700">四个流程页</text>
+                <rect x="422" y="70" rx="12" width="136" height="28" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)"/><text x="436" y="88" fill="#dff3ff" font-size="13">① 工单派发弹窗</text>
+                <rect x="422" y="108" rx="12" width="136" height="28" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)"/><text x="436" y="126" fill="#dff3ff" font-size="13">② 现场签到回传</text>
+                <rect x="422" y="146" rx="12" width="136" height="28" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)"/><text x="436" y="164" fill="#dff3ff" font-size="13">③ 处置拍照上传</text>
+                <rect x="422" y="184" rx="12" width="136" height="28" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)"/><text x="436" y="202" fill="#dff3ff" font-size="13">④ 复盘评分归档</text>
+
+                <rect x="592" y="18" rx="16" ry="16" width="172" height="234" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.14)"/>
+                <text x="610" y="48" fill="#eff6ff" font-size="18" font-weight="700">培训产出</text>
+                <path d="M612 78h132" stroke="rgba(255,255,255,.12)"/>
+                <text x="612" y="98" fill="#dff3ff" font-size="14">• 案例复盘摘要</text>
+                <text x="612" y="128" fill="#dff3ff" font-size="14">• 岗位 SOP 强弱项</text>
+                <text x="612" y="158" fill="#dff3ff" font-size="14">• KPI 评分看板</text>
+                <text x="612" y="188" fill="#dff3ff" font-size="14">• 改进项清单</text>
+                <rect x="610" y="204" rx="10" width="124" height="26" fill="url(#g2)" opacity=".92"/>
+                <text x="628" y="221" fill="#352008" font-size="13" font-weight="700">用于演练，不替代考核</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="title">这份 HTML 演练脚本是否合适？</div>
+              <div class="desc">结论：合适，而且很适合内部培训。原因是它能把系统 Demo 从“能看”变成“能讲、能演、能评、能复盘”。</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="script-glance">
+              <div class="info-tile"><strong>为什么合适</strong><div>系统 Demo 负责展示界面逻辑，演练脚本负责说明“什么时候演、谁来演、怎么推进、看什么、怎么评分”。二者配套，培训效果会明显更好。</div></div>
+              <div class="info-tile"><strong>适用对象</strong><div>领导、调度员、泵站值守、水厂运行、客服联动、网格员、抢险队、班组教员。</div></div>
+              <div class="info-tile"><strong>推荐使用方式</strong><div>1 套系统 Demo + 1 份演练脚本 + 1 张评分表 + 1 轮复盘会。先讲脚本，再切系统，最后做评分和改进。</div></div>
+              <div class="info-tile"><strong>最有价值的内容</strong><div>场景分类、进度节点、岗位动作、培训关注点、常见失误、复盘字段和评分口径。</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel-grid">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">演练分类</div>
+            <div class="desc">建议按“复合灾害类型 × 岗位主责 × 训练重点”来分组，避免只演单一积水点处置</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr><th>分类</th><th>建议场景</th><th>训练主轴</th><th>建议时长</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="scenario-tag lv-orange">A 类 / 暴雨顶托</span></td><td>梅雨暴雨 + 沿江高水位顶托 + 下穿通道积水</td><td>风险识别、网格派单、道路封控、泵车前置</td><td>45–60 分钟</td></tr>
+              <tr><td><span class="scenario-tag lv-red">B 类 / 断电失效</span></td><td>台风外围风雨 + 关键泵站外电中断 + 地下空间倒灌</td><td>泵站保运、机电安全、先封控后抢险、发电车联动</td><td>60–90 分钟</td></tr>
+              <tr><td><span class="scenario-tag lv-yellow">C 类 / 保供协同</span></td><td>原水浊度突升 + 用户报障聚集 + 局部低压核查</td><td>水厂 / 客服 / 网格三方联动、统一口径、服务连续性</td><td>45–60 分钟</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">演练进度模板</div>
+            <div class="desc">建议所有场景统一使用 6 段推进法，便于班组理解节奏和教员控场</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="timeline" id="masterTimeline"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel-grid">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">场景卡片</div>
+            <div class="desc">点击切换不同训练场景，右侧内容会同步切换为对应进度、岗位重点和流程页</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="scenario-list" id="scenarioList"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">当前场景摘要</div>
+            <div class="desc">建议教员先讲“场景背景—训练目的—关键底线—进度节点”，再切到系统界面操作</div>
+          </div>
+          <div class="switches" id="sceneBadge"></div>
+        </div>
+        <div class="card-body" id="sceneSummary"></div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="card-head">
+        <div>
+          <div class="title">三套岗位界面如何讲</div>
+          <div class="desc">让学员明确：不同岗位不是“都看一样的页面”，而是“在同一事件里看不同重点”</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="role-grid" id="roleGrid"></div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <div class="card-head">
+        <div>
+          <div class="title">四个流程页讲解脚本</div>
+          <div class="desc">建议每个流程页都讲“触发条件、操作动作、培训关注点、易错点”</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="flow-grid" id="flowGrid"></div>
+      </div>
+    </section>
+
+    <section class="section panel-grid">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">模拟手机页面小样</div>
+            <div class="desc">用于讲解界面顺序和岗位关注重点，便于“图文并茂”培训展示</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="shot-grid" id="shotGrid"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">培训关注点</div>
+            <div class="desc">更偏岗位培训，不只是讲功能，还要讲底线、协同和复盘要求</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="focus-grid" id="focusGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section panel-grid">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">案例复盘与岗位 SOP</div>
+            <div class="desc">用典型情景训练“复合灾害”和“岗位闭环”，避免只讲单点操作</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="sop-grid" id="sopGrid"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="title">培训 KPI 看板</div>
+            <div class="desc">用于班组演练评分，不代表正式考核口径</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="score-grid" id="scoreGrid"></div>
+        </div>
+      </div>
+      <div class="footer-note">说明：本 HTML 演练脚本中的地图、告警、工单、到场、照片、评分和案例均为模拟示意，适用于培训演练、岗位带教、桌面推演和内部汇报，不替代正式防汛调度系统、法定预警发布、真实 GIS/SCADA/工单平台，也不作为正式绩效考核依据。</div>
+    </section>
+
+    <div class="foot-actions">
+      <a class="btn" href="sandbox:/mnt/data/jiangnan_mobile_cockpit_drill_script.html">下载本演练脚本 HTML</a>
+      <a class="btn" href="sandbox:/mnt/data/jiangnan_mobile_duty_system_pro.html">查看配套移动值班系统 Demo</a>
+    </div>
+  </div>
+
+  <script>
+    const masterTimeline = [
+      {time:'阶段 1', state:'done', text:'演练准备：教员介绍场景背景、天气与水位条件、参与岗位、纪律要求和评分规则。'},
+      {time:'阶段 2', state:'done', text:'事件触发：播放系统告警、用户报障或设备异常，进入岗位识别阶段。'},
+      {time:'阶段 3', state:'active', text:'分级研判：领导定调、总值班合并事件、泵站岗确认设备状态与风险底线。'},
+      {time:'阶段 4', state:'', text:'派单执行：通过工单派发、签到回传、照片上传完成现场闭环。'},
+      {time:'阶段 5', state:'', text:'过程修正：依据液位、浊度、投诉量、设备恢复情况决定是否升级或降级。'},
+      {time:'阶段 6', state:'', text:'复盘评分：形成案例总结、岗位 SOP 优化项和培训问题清单。'}
+    ];
+
+    const scenarios = {
+      rain: {
+        name:'场景 A｜梅雨暴雨 + 沿江高水位顶托',
+        level:['lv-orange','橙色演练'],
+        progress:72,
+        purpose:'训练暴雨内涝、排口顶托、下穿通道积水场景下的网格责任确认、道路封控、泵车前置和泵站负荷协同。',
+        suitable:'适合排水运维、道路协同、网格员和总值班联合训练。',
+        keyLine:'培训底线：地下空间先封控后抢险，排口顶托不是单点设施问题，而是流域—城市—网格联动问题。',
+        steps:[
+          ['08:18','done','短临暴雨预警触发，系统形成橙色候选事件'],
+          ['08:23','done','外河水位接近顶托阈值，沿江排口进入重点盯守'],
+          ['08:27','done','下穿通道视频识别积水，事件自动升级'],
+          ['08:31','active','总值班派单至网格05/06，道路封控组联动'],
+          ['08:46','','泵车抵达、执行抽排与照片回传'],
+          ['09:20','','完成首轮复盘评分，判断是否局部降级']
+        ],
+        roles:[
+          {title:'领导版',note:'看态势、看底线、看资源优先级',items:['先看北部沿江顶托带与下穿通道叠加风险','明确“先人后物、先封控后抢险”','决定泵车、封控、客服口径的优先顺序']},
+          {title:'总值班版',note:'看事件合并、派单与资源',items:['5 分钟内完成事件合并与分级','10 分钟内确认网格责任和道路联动','盯首队到场时长、液位回落曲线、回传照片完整性']},
+          {title:'泵站值守版',note:'看液位、泵态、外电和备泵',items:['复核液位计有效性与备用泵热备状态','确认外电、油机接口与手动切换条件','每 10 分钟回传液位、泵态和现场照片']}
+        ],
+        flowFocus:[
+          ['工单派发','触发条件：液位上升 + 视频识别 + 用户报障叠加。关注点：是否合并重复告警，是否派给正确网格。'],
+          ['签到回传','触发条件：队伍到点。关注点：签到时间、坐标、所属岗位、现场第一判断。'],
+          ['处置拍照','触发条件：开井、封控、抽排。关注点：照片是否能证明动作已执行，是否有前后对比。'],
+          ['复盘评分','触发条件：首轮处置完成。关注点：封控是否先于抢险、回传字段是否完整。']
+        ],
+        shots:[
+          {title:'总览页', kind:'orange', lines:['橙色响应：暴雨 + 顶托','待处置工单 27 件','重点点位：下穿通道 / 城东泵站','建议：先封控再抽排']},
+          {title:'地图页', kind:'blue', lines:['沿江顶托带 2 处高风险','网格05/06 进入橙色处置','泵车-03 距离 4.2 km','点击点位查看责任人']}
+        ],
+        focus:[
+          {title:'培训关注点 1',items:['顶托要和雨量一起讲，不能只讲“下大雨”','下穿通道是人员安全敏感点，要先封控','总值班要学会把重复告警合并成同一事件']},
+          {title:'培训关注点 2',items:['网格责任必须明确到人','泵车前置不是越多越好，而是要与交通和泵站能力联动','派单后必须盯签到与回传，不是派完就结束']},
+          {title:'培训关注点 3',items:['复盘时要补视频编号、封控时间和解除时间','照片要能支撑评分，不是随手一拍','要讲明群众报障也是一种“传感器”']}
+        ],
+        sops:[
+          {title:'复盘案例｜2021 台风“烟花”式区域风雨叠加',items:['训练点：从单点积水转向区域协同调度','看点：同图会商、跨网格支援、用户提醒同步','结论：事件合并和资源优先级比单点抢险更关键']},
+          {title:'岗位 SOP｜暴雨顶托场景',items:['总值班：5 分钟分级、10 分钟定责、15 分钟派单','道路组：先封控再导流，再配合抽排','泵站岗：液位 / 泵态 / 外电三项同时看']}
+        ],
+        scores:[
+          ['预警提前量','18 min','目标 ≥ 15 min，达标'],
+          ['派单签收时长','4 min','目标 ≤ 5 min，达标'],
+          ['首队到场时长','22 min','目标 ≤ 30 min，达标'],
+          ['复盘字段完整率','93%','仍需补充视频编号']
+        ]
+      },
+      typhoon: {
+        name:'场景 B｜台风外围风雨 + 泵站外电中断',
+        level:['lv-red','红色演练'],
+        progress:84,
+        purpose:'训练“风雨 + 顶托 + 外电中断”复合灾害处置，突出泵站保运、机电安全、地下空间封控和红色响应节奏。',
+        suitable:'适合泵站值守、机电保障、总值班、抢险队联合联演。',
+        keyLine:'培训底线：先人后物，涉水涉电双人作业；泵站失压时先处理“电”，再谈“水”。',
+        steps:[
+          ['09:00','done','城东泵站失压，SCADA 与配电监测同时告警'],
+          ['09:03','done','总值班上收红色工单并发出红色指令'],
+          ['09:07','done','地下车库执行封控，客服同步推送提醒'],
+          ['09:12','active','发电车抵达，泵站岗执行接入检查'],
+          ['09:25','','1# 泵恢复运行，液位进入下降通道'],
+          ['09:45','','阶段复盘，判断是否分区降级']
+        ],
+        roles:[
+          {title:'领导版',note:'看底线、看红色资源调度',items:['红色演练先看人身安全和地下空间','决定发电车、机电保障组、泵车优先级','要求 30 分钟内形成首轮风险圈闭']},
+          {title:'总值班版',note:'看失压事件上收与资源派发',items:['确认失压来源并合并相关事件','优先派发机电保障 + 发电车','20 分钟内回看泵站恢复曲线和封控状态']},
+          {title:'泵站值守版',note:'看电源、液位和泵态',items:['先断后验，严禁带负荷盲切','油机接入先保 1 台主泵运行','恢复后 30 分钟内不得离场']}
+        ],
+        flowFocus:[
+          ['工单派发','关注红色工单是否上收、是否同步到机电和道路封控双线。'],
+          ['签到回传','关注高压电工是否到位、签到是否包含风险口令。'],
+          ['处置拍照','关注油机接入前后、电柜状态、封控现场三类照片。'],
+          ['复盘评分','关注恢复时长、人员封控是否先完成、用电安全记录是否齐全。']
+        ],
+        shots:[
+          {title:'泵站值守页', kind:'red', lines:['红色事件：外电中断','UPS 剩余 24 分钟','油机接口：接入中','要求：双人到场 / 先断后验']},
+          {title:'签到回传页', kind:'yellow', lines:['签到坐标：城东泵站','岗位：机电保障组','风险口令：涉电警戒已设','预计恢复：37 分钟']}
+        ],
+        focus:[
+          {title:'培训关注点 1',items:['很多人只盯液位，不盯电源，这是典型误区','红色事件不是“更着急”，而是“更有纪律”','总值班必须同步客服与封控，不可只派机电']},
+          {title:'培训关注点 2',items:['签到必须核验岗位资质与绝缘装备','照片不能只有设备，要有警戒和封控证据','恢复后要盯 30 分钟稳定期，防止反复故障']},
+          {title:'培训关注点 3',items:['复盘要问清楚：UPS 剩余多久、油机接入多久、首泵恢复多久','如果这些答不上来，说明训练还没到位','建议教员重点抽查机电和泵站岗']}
+        ],
+        sops:[
+          {title:'复盘案例｜外电中断导致泵站失效',items:['训练点：把“电”纳入防汛链条','看点：UPS 时长、油机接入、泵站恢复曲线','结论：电力保障动作慢，会把普通积水变成重大险情']},
+          {title:'岗位 SOP｜台风断电影响场景',items:['总值班：失压事件上收 + 双线派单','泵站岗：先核电源，再核液位与泵态','抢险组：地下空间先封控后抽排']}
+        ],
+        scores:[
+          ['派单签收时长','3 min','红色目标 ≤ 5 min'],
+          ['发电车到场','9 min','满足预案要求'],
+          ['泵站恢复时长','37 min','有优化空间'],
+          ['人员封控完成率','100%','训练目标达成']
+        ]
+      },
+      rawwater: {
+        name:'场景 C｜原水浊度突升 + 用户报障聚集',
+        level:['lv-yellow','黄色演练'],
+        progress:66,
+        purpose:'训练水厂、客服、网格三方联动，突出“服务连续性事件”的识别、统一口径和数据复核。',
+        suitable:'适合水厂运行、检测、客服联动席、网格巡查联合带教。',
+        keyLine:'培训底线：水质安全是绝对底线，用户报障不是噪音，而是事件感知的一部分。',
+        steps:[
+          ['10:02','done','在线浊度仪触发黄色预警'],
+          ['10:06','done','客服聚类识别主城区报障上升'],
+          ['10:11','done','总值班认定为跨岗位联合事件'],
+          ['10:18','active','水厂完成首轮人工复核并切换高浊工艺'],
+          ['10:26','','客服统一口径推送，网格员核查低压点'],
+          ['10:45','','复盘判断是否降级为蓝色跟踪']
+        ],
+        roles:[
+          {title:'领导版',note:'看水质底线、看用户感知',items:['明确“保供连续性”是主线，不被局部排水事件带偏','关注重点用户回访和口径统一','决定是否升级客户提醒']},
+          {title:'总值班版',note:'看事件归并、看协同链条',items:['把水厂、客服、网格三线信息归并成一个事件','盯人工复核完成时间和解释口径下发时间','判断是全局问题还是局部施工扰动']},
+          {title:'岗位联动版',note:'看数据复核与用户回访',items:['检测班先复核数据，再建议工艺','客服提炼高频关键词并回传事件中心','网格员核查施工点、低压点和重点用户']}
+        ],
+        flowFocus:[
+          ['工单派发','关注是否同时派给水厂、客服、网格，而不是只派一方。'],
+          ['签到回传','关注现场回传是否包含低压点、施工点、重点用户。'],
+          ['处置拍照','关注供水保障动作、人工采样和现场核查照片。'],
+          ['复盘评分','关注回访完成率、口径统一时长、误判纠正是否及时。']
+        ],
+        shots:[
+          {title:'领导版摘要页', kind:'yellow', lines:['黄色响应：原水异常','用户报障聚集 12 件','重点：统一口径 + 人工复核','结论：先确认全局或局部']},
+          {title:'复盘评分页', kind:'blue', lines:['首轮研判 11 分钟','人工复核 19 分钟','回访完成率 88%','改进：夜班回访再加强']}
+        ],
+        focus:[
+          {title:'培训关注点 1',items:['不要把水质问题只讲成化验问题','用户报障要与在线仪表一起看','很多误判来自“只信设备，不看用户”']},
+          {title:'培训关注点 2',items:['客服是联动岗位，不是单纯接线岗位','统一解释口径必须在 10 分钟内形成','重点用户回访要有记录字段']},
+          {title:'培训关注点 3',items:['网格巡查要看施工扰动、局部低压和漏损可能','复盘要问清楚：是原水异常、施工扰动还是局部漏损','建议把典型问答沉淀成话术模板']}
+        ],
+        sops:[
+          {title:'复盘案例｜原水异常不是单纯化验问题',items:['训练点：水厂、客服、网格放在同一事件里','看点：用户侧是不是早期传感器','结论：统一口径和回访比单点技术动作更难']},
+          {title:'岗位 SOP｜保供协同场景',items:['总值班：先定全局/局部，再同步三方','检测班：双重复核后再提工艺建议','客服：记录高频关键词并回传事件中心']}
+        ],
+        scores:[
+          ['首轮研判','11 min','达标'],
+          ['统一口径下发','8 min','客服动作较快'],
+          ['人工复核完成','19 min','满足训练值'],
+          ['回访完成率','88%','夜班跟进可加强']
+        ]
+      }
+    };
+
+    const roleGrid = document.getElementById('roleGrid');
+    const flowGrid = document.getElementById('flowGrid');
+    const focusGrid = document.getElementById('focusGrid');
+    const scoreGrid = document.getElementById('scoreGrid');
+    const sopGrid = document.getElementById('sopGrid');
+    const shotGrid = document.getElementById('shotGrid');
+    const scenarioList = document.getElementById('scenarioList');
+    const sceneSummary = document.getElementById('sceneSummary');
+    const sceneBadge = document.getElementById('sceneBadge');
+    const masterTimelineEl = document.getElementById('masterTimeline');
+
+    let current = 'rain';
+
+    function renderMasterTimeline(){
+      masterTimelineEl.innerHTML = masterTimeline.map(s=>`
+        <div class="step ${s.state}">
+          <div class="dot"></div>
+          <div class="step-inner">
+            <div class="time">${s.time}</div>
+            <div class="txt">${s.text}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderScenarioList(){
+      scenarioList.innerHTML = Object.entries(scenarios).map(([key,s])=>`
+        <div class="scenario-card ${key===current?'active':''}" data-key="${key}">
+          <div class="scenario-head">
+            <div>
+              <div class="scenario-title">${s.name}</div>
+              <div class="scenario-meta">${s.purpose}</div>
+            </div>
+            <span class="status-pill ${s.level[0]}">${s.level[1]}</span>
+          </div>
+          <div class="progress"><span style="width:${s.progress}%"></span></div>
+          <div class="progress-note">训练完成度示意 ${s.progress}%｜${s.suitable}</div>
+        </div>
+      `).join('');
+      scenarioList.querySelectorAll('.scenario-card').forEach(el=>{
+        el.addEventListener('click', ()=>{ current = el.dataset.key; render(); window.scrollTo({top:420, behavior:'smooth'}); });
+      });
+    }
+
+    function phoneMock(kind, lines){
+      const theme = kind==='red' ? 'rgba(255,109,109,.12)' : kind==='orange' ? 'rgba(255,156,72,.12)' : kind==='yellow' ? 'rgba(255,207,89,.12)' : 'rgba(69,173,255,.12)';
+      const color = kind==='red' ? '#ffd7d7' : kind==='orange' ? '#ffe5d2' : kind==='yellow' ? '#fff5cb' : '#dff3ff';
+      return `
+        <div class="mock-phone">
+          <div class="mock-screen">
+            <div class="mock-header"><span>移动驾驶舱</span><span>09:28</span></div>
+            <div class="mock-alert" style="background:${theme}; color:${color}; border-color:rgba(255,255,255,.16)">${lines[0]}</div>
+            <div class="mock-block"><div style="font-size:11px;color:#9bb5c9">重点信息</div><div style="margin-top:6px;font-size:12px;line-height:1.6">${lines[1]}</div></div>
+            <div class="mock-block"><div style="font-size:11px;color:#9bb5c9">执行建议</div><div style="margin-top:6px;font-size:12px;line-height:1.6">${lines[2]}</div></div>
+            <div class="mock-block"><div style="font-size:11px;color:#9bb5c9">当前进度</div><div class="mock-row"><span style="font-size:12px">${lines[3]}</span><div class="bar"><span style="width:72%"></span></div></div></div>
+          </div>
+        </div>`;
+    }
+
+    function render(){
+      const s = scenarios[current];
+      renderScenarioList();
+      sceneBadge.innerHTML = `<span class="status-pill ${s.level[0]}">${s.level[1]}</span><span class="status-pill lv-blue">适用：${s.suitable}</span>`;
+      sceneSummary.innerHTML = `
+        <div class="info-tile" style="margin-bottom:12px"><strong>训练目的</strong><div>${s.purpose}</div></div>
+        <div class="info-tile" style="margin-bottom:12px"><strong>脚本主线</strong><div>${s.keyLine}</div></div>
+        <div class="info-tile"><strong>建议讲解顺序</strong><div>① 讲背景与等级 → ② 看领导版判断 → ③ 看总值班派单 → ④ 看岗位回传 → ⑤ 讲流程页 → ⑥ 做评分复盘。</div></div>
+        <div class="timeline" style="margin-top:12px">
+          ${s.steps.map(st=>`<div class="step ${st[1]}"><div class="dot"></div><div class="step-inner"><div class="time">${st[0]}</div><div class="txt">${st[2]}</div></div></div>`).join('')}
+        </div>`;
+
+      roleGrid.innerHTML = s.roles.map(r=>`<div class="role-card"><h3>${r.title}</h3><div class="desc" style="margin:0 0 8px">${r.note}</div><ul>${r.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+
+      flowGrid.innerHTML = s.flowFocus.map((f,idx)=>`
+        <div class="flow-card">
+          <div class="flow-visual">
+            <svg viewBox="0 0 220 120" width="100%" height="100%" aria-hidden="true">
+              <rect x="18" y="22" rx="14" width="184" height="76" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)"/>
+              <circle cx="44" cy="60" r="18" fill="${idx===0?'#45adff':idx===1?'#35d596':idx===2?'#ff9c48':'#948cff'}" opacity=".92"/>
+              <text x="38" y="66" fill="#fff" font-size="16">${idx+1}</text>
+              <path d="M72 60h94" stroke="rgba(255,255,255,.16)" stroke-width="6" stroke-linecap="round"/>
+              <path d="M152 50l18 10-18 10" fill="none" stroke="rgba(255,255,255,.36)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>${f[0]}</h3>
+          <p>${f[1]}</p>
+        </div>
+      `).join('');
+
+      shotGrid.innerHTML = s.shots.map(sh=>`<div class="shot"><h3>${sh.title}</h3>${phoneMock(sh.kind, sh.lines)}</div>`).join('');
+      focusGrid.innerHTML = s.focus.map(f=>`<div class="focus-card"><h3>${f.title}</h3><ul>${f.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+      sopGrid.innerHTML = s.sops.map(sp=>`<div class="sop-card"><h3>${sp.title}</h3><ul>${sp.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+      scoreGrid.innerHTML = s.scores.map(sc=>`<div class="score-card"><div class="k">${sc[0]}</div><div class="num">${sc[1]}</div><div class="n">${sc[2]}</div></div>`).join('');
+    }
+
+    renderMasterTimeline();
+    render();
+  </script>
+</body>
+</html>
