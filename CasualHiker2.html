@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0d0e10">
+<title>江南山行·挑战版 — 4 级 5 级线路</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0e10;
+  --bg-soft: #16181c;
+  --bg-card: #1a1d22;
+  --bg-elev: #22262d;
+  --line: rgba(255,255,255,0.08);
+  --line-strong: rgba(255,255,255,0.18);
+  --text: #e8e6e0;
+  --text-soft: #a8a59c;
+  --text-mute: #6b6960;
+  --orange: #d97847;
+  --orange-deep: #b85a2c;
+  --blood: #c2362a;
+  --blood-deep: #8a2418;
+  --gold: #d4a574;
+  --moss: #6b8068;
+  --warn: #e8b14a;
+  --serif: 'Noto Serif SC', 'Songti SC', serif;
+  --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  --display: 'Bebas Neue', 'Noto Serif SC', sans-serif;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--serif);
+  font-size:15px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+html{scroll-behavior:smooth}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(ellipse at 30% 10%, rgba(217,120,71,0.08), transparent 60%),
+    radial-gradient(ellipse at 70% 90%, rgba(194,54,42,0.05), transparent 60%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4;
+}
+
+main{position:relative;z-index:1}
+
+::selection{background:var(--blood);color:#fff}
+
+/* ============== COVER ============== */
+.cover{
+  position:relative;
+  min-height:100vh;
+  padding:60px 22px 40px;
+  display:flex;flex-direction:column;
+  border-bottom:1px solid var(--line-strong);
+  overflow:hidden;
+}
+.cover-stamp{
+  position:absolute;top:24px;right:22px;
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;color:var(--text-mute);
+  text-transform:uppercase;
+}
+.cover-stamp::before{content:'';display:inline-block;width:24px;height:1px;background:var(--text-mute);vertical-align:middle;margin-right:8px}
+
+.warn-tag{
+  position:absolute;top:60px;left:22px;
+  background:var(--blood);color:#fff;
+  padding:6px 12px;
+  font-family:var(--mono);font-size:10px;
+  font-weight:700;letter-spacing:.18em;
+  border-radius:1px;
+  transform:rotate(-2deg);
+}
+
+.cover-title{margin-top:160px;margin-bottom:auto}
+.cover-title .label{
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.3em;color:var(--orange);
+  text-transform:uppercase;margin-bottom:12px;
+}
+.cover-title h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:62px;line-height:1;
+  letter-spacing:.04em;color:var(--text);
+  margin:0;
+}
+.cover-title h1 em{font-style:normal;color:var(--blood);font-weight:900}
+
+.cover-title .sub{
+  font-family:var(--display);font-size:24px;
+  letter-spacing:.18em;color:var(--orange);
+  margin-top:18px;line-height:1;
+}
+
+.cover-quote{
+  font-family:var(--serif);font-size:14px;
+  font-style:italic;color:var(--text-soft);
+  margin-top:24px;line-height:1.7;
+  border-left:2px solid var(--blood);
+  padding-left:14px;
+}
+
+/* 山线 SVG */
+.cover-svg{
+  width:100%;max-width:380px;margin:36px 0 24px;
+  display:block;align-self:center;
+}
+
+.cover-meta{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:18px 12px;margin-top:auto;
+  padding-top:24px;border-top:1px solid var(--line);
+}
+.cover-meta div{font-size:12px}
+.cover-meta .lab{
+  font-family:var(--mono);font-size:9px;
+  letter-spacing:.18em;color:var(--text-mute);
+  text-transform:uppercase;display:block;margin-bottom:4px;
+}
+.cover-meta .val{color:var(--text);font-weight:500;font-size:13.5px}
+.cover-meta .val em{font-style:normal;color:var(--orange);font-weight:700}
+
+.cover-foot{
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;color:var(--text-mute);
+  text-align:center;margin-top:32px;
+  text-transform:uppercase;
+}
+
+/* ============== TODAY (JS) ============== */
+.today-pick{
+  margin:24px 0 0;
+  padding:18px 16px;
+  background:linear-gradient(135deg, rgba(217,120,71,0.12), rgba(194,54,42,0.06));
+  border:1px solid rgba(217,120,71,0.3);
+  border-left:3px solid var(--orange);
+  position:relative;
+}
+.today-pick .tag{
+  display:inline-block;
+  font-family:var(--mono);font-size:9px;
+  letter-spacing:.25em;color:var(--orange);
+  text-transform:uppercase;margin-bottom:8px;
+}
+.today-pick h3{
+  font-family:var(--serif);font-weight:700;
+  font-size:18px;margin:0 0 6px;color:var(--text);
+}
+.today-pick .when{
+  font-family:var(--mono);font-size:10px;
+  color:var(--text-mute);letter-spacing:.1em;
+  margin-bottom:10px;
+}
+.today-pick p{font-size:13px;color:var(--text-soft);line-height:1.6;margin:6px 0 0}
+.today-pick a{
+  display:inline-block;
+  margin-top:12px;
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.15em;color:var(--orange);
+  text-decoration:none;border-bottom:1px solid var(--orange);
+  padding-bottom:2px;
+}
+
+/* ============== TOC ============== */
+.toc{
+  margin-top:32px;padding:18px 16px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+}
+.toc-title{
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.25em;color:var(--orange);
+  text-transform:uppercase;margin-bottom:12px;
+}
+.toc ol{list-style:none;font-size:13px}
+.toc li{
+  padding:8px 0;border-bottom:1px dashed var(--line);
+  display:flex;justify-content:space-between;
+  align-items:baseline;gap:8px;
+}
+.toc li:last-child{border-bottom:0}
+.toc a{color:var(--text);text-decoration:none;font-weight:500;flex:1}
+.toc a:active{color:var(--orange)}
+.toc .num{font-family:var(--mono);font-size:10px;color:var(--text-mute);letter-spacing:.1em}
+
+/* ============== SECTIONS ============== */
+section{
+  padding:52px 22px;
+  border-bottom:1px solid var(--line);
+  position:relative;
+}
+
+.s-num{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--text-mute);margin-bottom:8px}
+.s-title{
+  font-family:var(--serif);font-weight:900;
+  font-size:30px;line-height:1.1;
+  letter-spacing:.02em;margin:0 0 8px;
+}
+.s-title em{font-style:normal;color:var(--blood)}
+.s-lede{
+  font-family:var(--serif);font-style:italic;
+  font-size:15px;color:var(--text-soft);
+  margin:14px 0 28px;line-height:1.5;
+  border-left:2px solid var(--orange);padding-left:14px;
+}
+
+.subhead{
+  font-family:var(--serif);font-size:16px;font-weight:700;
+  margin:24px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.subhead::before{content:'';width:18px;height:2px;background:var(--orange)}
+
+/* ============== DIFFICULTY MATRIX ============== */
+.diff-matrix{
+  margin:20px 0;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:4px;
+}
+.diff-matrix>div{
+  padding:10px 6px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  text-align:center;
+  font-family:var(--mono);font-size:9px;
+  letter-spacing:.05em;color:var(--text-mute);
+}
+.diff-matrix>div .n{
+  display:block;font-family:var(--serif);
+  font-weight:900;font-size:18px;margin-bottom:2px;
+}
+.diff-matrix>div.l1{opacity:.4}
+.diff-matrix>div.l2{opacity:.5}
+.diff-matrix>div.l3{opacity:.65}
+.diff-matrix>div.l4{
+  background:rgba(217,120,71,0.12);border-color:var(--orange);color:var(--orange);
+}
+.diff-matrix>div.l4 .n{color:var(--orange)}
+.diff-matrix>div.l5{
+  background:rgba(194,54,42,0.15);border-color:var(--blood);color:#ec5e51;
+}
+.diff-matrix>div.l5 .n{color:var(--blood)}
+
+/* ============== QUICK TABLE ============== */
+.qt{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+.qt th{
+  text-align:left;font-family:var(--mono);font-size:9px;
+  letter-spacing:.15em;color:var(--text-mute);
+  text-transform:uppercase;padding:8px 4px;
+  border-bottom:1px solid var(--line-strong);font-weight:500;
+}
+.qt td{padding:9px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.qt td a{color:var(--text);text-decoration:none;font-weight:600;border-bottom:1px dashed var(--text-mute)}
+.qt td a:active{color:var(--orange)}
+.qt .km{font-family:var(--mono);color:var(--text-soft);font-size:11px}
+.qt .lvl4{color:var(--orange);font-family:var(--mono);font-weight:700;font-size:11px}
+.qt .lvl5{color:#ec5e51;font-family:var(--mono);font-weight:700;font-size:11px}
+
+/* ============== ROUTE CARDS ============== */
+.route{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  margin-bottom:22px;
+  position:relative;
+  overflow:hidden;
+}
+.route::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+}
+.route.t4::before{background:var(--orange)}
+.route.t5::before{background:linear-gradient(90deg,var(--blood),var(--blood-deep))}
+
+.r-head{padding:18px 16px 14px;border-bottom:1px solid var(--line)}
+.r-tag{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:8px;
+  font-family:var(--mono);font-size:9px;
+  letter-spacing:.2em;text-transform:uppercase;
+}
+.r-tag .left{color:var(--text-mute)}
+.r-tag .level{
+  color:#fff;background:var(--orange);
+  padding:2px 8px;border-radius:1px;font-weight:700;
+}
+.r-tag .level.l5{background:var(--blood)}
+
+.r-name{
+  font-family:var(--serif);font-weight:900;
+  font-size:22px;color:var(--text);line-height:1.2;
+  margin:0 0 4px;letter-spacing:.02em;
+}
+.r-alias{
+  font-family:var(--mono);font-size:10px;
+  color:var(--orange);letter-spacing:.15em;
+}
+.r-quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:13px;color:var(--text-soft);
+  margin-top:8px;line-height:1.5;
+}
+
+/* 关键数字栅格 */
+.r-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--line);
+}
+.r-stats>div{
+  padding:14px 6px;text-align:center;
+  border-right:1px solid var(--line);
+}
+.r-stats>div:last-child{border-right:0}
+.r-stats .lab{
+  font-family:var(--mono);font-size:8.5px;
+  letter-spacing:.15em;color:var(--text-mute);
+  text-transform:uppercase;display:block;margin-bottom:4px;
+}
+.r-stats .val{
+  font-family:var(--serif);font-size:16px;font-weight:700;
+  color:var(--text);line-height:1;
+}
+.r-stats .val.warn{color:var(--orange)}
+.r-stats .val.crit{color:#ec5e51}
+.r-stats .val.small{font-size:12px}
+
+/* 关键数字第二行：技术指标 */
+.r-tech{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--bg-soft);
+  font-size:11px;
+}
+.r-tech>div{
+  padding:10px 6px;text-align:center;
+  border-right:1px solid var(--line);
+  font-family:var(--mono);
+}
+.r-tech>div:last-child{border-right:0}
+.r-tech .lab{
+  display:block;font-size:8px;
+  letter-spacing:.15em;color:var(--text-mute);
+  text-transform:uppercase;margin-bottom:3px;
+}
+.r-tech .val{color:var(--text);font-weight:500}
+
+.r-body{padding:16px}
+.r-body h4{
+  font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.2em;color:var(--orange);
+  text-transform:uppercase;margin:14px 0 6px;font-weight:700;
+}
+.r-body h4:first-child{margin-top:0}
+.r-body p{font-size:13.5px;line-height:1.65;color:var(--text-soft);margin:0 0 8px}
+
+.trail{
+  font-family:var(--serif);font-size:13px;
+  background:var(--bg-soft);
+  padding:10px 12px;border-left:2px solid var(--orange);
+  margin:6px 0 10px;line-height:1.6;color:var(--text);
+}
+.trail strong{color:var(--blood);font-weight:700}
+
+.kv{
+  display:grid;grid-template-columns:74px 1fr;
+  gap:6px 10px;font-size:12.5px;margin:6px 0 4px;
+}
+.kv dt{
+  font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.1em;color:var(--text-mute);
+  text-transform:uppercase;padding-top:2px;
+}
+.kv dd{margin:0;color:var(--text-soft);line-height:1.55}
+.kv dd strong{color:var(--text)}
+.kv dd.warn{color:var(--orange)}
+.kv dd.crit{color:#ec5e51}
+
+/* 风险段，路线卡专用 */
+.r-risk{
+  margin:14px 0 0;padding:12px;
+  background:rgba(194,54,42,0.08);
+  border:1px solid rgba(194,54,42,0.3);
+  border-left:3px solid var(--blood);
+}
+.r-risk h5{
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;color:#ec5e51;
+  text-transform:uppercase;margin:0 0 6px;font-weight:700;
+}
+.r-risk p{font-size:12px;color:var(--text-soft);line-height:1.6;margin:0}
+
+/* 撤退点 */
+.bailout{
+  margin-top:14px;padding:10px 12px;
+  background:rgba(107,128,104,0.1);
+  border-left:3px solid var(--moss);
+  font-size:12px;color:var(--text-soft);line-height:1.6;
+}
+.bailout strong{color:var(--moss);font-weight:700}
+
+/* 按钮组 */
+.r-actions{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6px;margin-top:16px;padding-top:14px;
+  border-top:1px dashed var(--line-strong);
+}
+.r-actions .full{grid-column:1/-1}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;padding:10px 8px;text-decoration:none;
+  font-family:var(--serif);font-size:12px;font-weight:600;
+  letter-spacing:.03em;border-radius:1px;
+  transition:all .15s;cursor:pointer;border:1px solid;
+  -webkit-appearance:none;
+}
+.btn:active{transform:scale(.98)}
+.btn svg{width:13px;height:13px;flex-shrink:0}
+.btn .en{font-family:var(--mono);font-size:9px;opacity:.65;margin-left:2px;letter-spacing:.05em}
+
+.btn.gmap{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.bmap{background:var(--orange);color:#fff;border-color:var(--orange)}
+.btn.gpx{background:var(--bg-elev);color:var(--text);border-color:var(--line-strong)}
+.btn.cp{background:transparent;color:var(--orange);border:1px dashed var(--orange)}
+.btn.cp.copied{background:var(--moss);color:#fff;border-style:solid;border-color:var(--moss)}
+.btn.cp.copied .cn::before{content:'✓ 已复制 · '}
+
+/* ============== HERO STATS BLOCK ============== */
+.hero-stats{
+  margin:28px 0 32px;
+  padding:22px 18px;
+  background:linear-gradient(135deg, var(--bg-card), var(--bg-soft));
+  border:1px solid var(--line-strong);
+  border-top:3px solid var(--blood);
+}
+.hero-stats .label{
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.2em;color:var(--blood);
+  text-transform:uppercase;margin-bottom:14px;
+}
+.hero-stats .grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+.hero-stats .item .num{
+  font-family:var(--display);font-size:32px;
+  color:var(--orange);line-height:1;letter-spacing:.04em;
+}
+.hero-stats .item .num em{font-style:normal;font-size:14px;color:var(--text-mute);margin-left:4px}
+.hero-stats .item .lab{
+  font-family:var(--mono);font-size:9px;
+  letter-spacing:.15em;color:var(--text-mute);
+  text-transform:uppercase;margin-top:4px;
+}
+
+/* ============== RISK SECTION (deep) ============== */
+.fatal-grid{
+  display:grid;grid-template-columns:1fr;gap:14px;
+  margin:20px 0 14px;
+}
+.fatal{
+  padding:18px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  border-left:4px solid var(--blood);
+  position:relative;
+}
+.fatal h4{
+  font-family:var(--serif);font-size:18px;font-weight:900;
+  margin:0 0 6px;color:var(--text);
+}
+.fatal h4 .icon{color:var(--blood);margin-right:8px}
+.fatal .stat{
+  font-family:var(--mono);font-size:10px;
+  color:var(--blood);letter-spacing:.1em;
+  margin-bottom:10px;
+}
+.fatal p{font-size:13px;line-height:1.65;color:var(--text-soft);margin:0 0 8px}
+.fatal .key{
+  margin-top:10px;padding:10px 12px;
+  background:rgba(194,54,42,0.08);
+  border-left:2px solid var(--blood);
+  font-size:12px;color:var(--text);line-height:1.6;
+}
+.fatal .key strong{color:var(--orange)}
+
+/* ============== GEAR SECTION ============== */
+.gear-cat{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:16px;margin-bottom:14px;
+  border-left:3px solid var(--orange);
+}
+.gear-cat.must{border-left-color:var(--blood)}
+.gear-cat.cond{border-left-color:var(--gold)}
+.gear-cat h4{
+  font-family:var(--serif);font-size:14px;font-weight:700;
+  margin:0 0 8px;display:flex;align-items:center;gap:8px;color:var(--text);
+}
+.gear-cat h4 .badge{
+  font-family:var(--mono);font-size:9px;
+  letter-spacing:.1em;padding:2px 6px;
+  background:var(--orange);color:#fff;font-weight:500;
+  text-transform:uppercase;
+}
+.gear-cat.must h4 .badge{background:var(--blood)}
+.gear-cat.cond h4 .badge{background:var(--gold);color:#1a1a1a}
+.gear-cat ul{margin:0;padding-left:18px;font-size:13px;color:var(--text-soft);line-height:1.75}
+.gear-cat ul li::marker{color:var(--orange);font-size:10px}
+.gear-cat ul li strong{color:var(--text)}
+
+/* ============== FLOAT NAV ============== */
+.fnav{
+  position:fixed;right:10px;bottom:14px;z-index:100;
+  display:flex;flex-direction:column;
+  background:var(--blood);
+  border-radius:3px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+  font-family:var(--mono);font-size:9px;
+  letter-spacing:.1em;opacity:.9;overflow:hidden;
+}
+.fnav a{
+  color:#fff;text-decoration:none;
+  padding:6px 10px;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.15);
+  font-weight:600;display:block;
+}
+.fnav a:last-child{border-bottom:0}
+.fnav a:active{background:#000}
+.fnav .top{
+  background:#000;color:var(--orange);
+  font-family:var(--serif);font-size:14px;
+  padding:8px 10px;font-weight:900;
+}
+
+/* ============== FOOTER ============== */
+footer{
+  padding:40px 22px 56px;
+  background:#000;
+  color:var(--text-soft);
+  border-top:2px solid var(--blood);
+}
+footer .ft{
+  font-family:var(--serif);font-weight:900;
+  font-size:18px;color:var(--text);margin-bottom:8px;letter-spacing:.05em;
+}
+footer .fm{
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.18em;color:var(--text-mute);
+  text-transform:uppercase;margin-bottom:24px;
+}
+footer p{font-size:12px;line-height:1.7;color:var(--text-soft);margin:0 0 10px}
+footer .src{
+  margin-top:20px;padding-top:16px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  font-size:11px;color:var(--text-mute);line-height:1.7;
+}
+footer .copy{
+  margin-top:28px;padding-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  text-align:center;
+}
+footer .copy .label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--text-mute);margin-bottom:6px}
+footer .copy .name{font-family:var(--serif);font-weight:900;font-size:16px;color:var(--text);letter-spacing:.1em}
+footer .copy .ver{font-family:var(--mono);font-size:10px;color:var(--text-mute);letter-spacing:.2em;margin-top:4px}
+footer .seal{
+  display:inline-block;width:42px;height:42px;
+  background:var(--blood);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;letter-spacing:.05em;
+  margin:14px auto 0;transform:rotate(2deg);
+}
+
+@media (min-width:600px){
+  body{font-size:16px}
+  .cover{padding:72px 36px 48px}
+  section{padding:64px 36px}
+  .cover-title h1{font-size:74px}
+  footer{padding:48px 36px 64px}
+}
+</style>
+</head>
+<body>
+
+<main>
+
+<!-- 浮动快捷导航 -->
+<nav class="fnav" aria-label="快捷跳转">
+  <a href="#" class="top">↑</a>
+  <a href="#today">今日</a>
+  <a href="#how">说明</a>
+  <a href="#routes">线路</a>
+  <a href="#fatal">险</a>
+  <a href="#gear">装备</a>
+</nav>
+
+<!-- ============== 封面 ============== -->
+<section class="cover">
+  <div class="warn-tag">LV.4 — LV.5</div>
+  <div class="cover-stamp">FIELD GUIDE · CHALLENGE EDITION</div>
+
+  <div class="cover-title">
+    <div class="label">江南山行 · 第二卷</div>
+    <h1>挑战<em>·</em>越野</h1>
+    <div class="sub">8 ROUTES · 4–5 GRADE</div>
+    <div class="cover-quote">"山不在高，险者为重。<br>这里的路，需要敬畏，更需要准备。"</div>
+  </div>
+
+  <!-- 山脊线插画 -->
+  <svg class="cover-svg" viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mt5" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#d97847" stop-opacity="0.8"/>
+        <stop offset="1" stop-color="#c2362a" stop-opacity="0.4"/>
+      </linearGradient>
+    </defs>
+    <!-- 远山层 -->
+    <path d="M0,90 L30,70 L55,82 L85,55 L110,70 L140,40 L170,60 L200,35 L230,55 L260,30 L290,55 L320,42 L350,60 L380,50 L380,120 L0,120 Z" 
+          fill="#22262d" opacity="0.7"/>
+    <!-- 中山层 -->
+    <path d="M0,100 L25,82 L55,92 L80,72 L105,86 L135,60 L165,75 L195,55 L225,72 L255,52 L285,70 L315,60 L345,75 L380,65 L380,120 L0,120 Z" 
+          fill="#3a3530" opacity="0.85"/>
+    <!-- 近山尖锐山脊 -->
+    <path d="M0,115 L20,98 L40,108 L60,88 L80,102 L105,75 L130,90 L155,68 L180,82 L205,58 L230,72 L260,50 L285,68 L315,55 L345,70 L380,62 L380,120 L0,120 Z" 
+          fill="url(#mt5)"/>
+    <!-- 顶峰标 -->
+    <line x1="205" y1="58" x2="205" y2="42" stroke="#c2362a" stroke-width="0.8"/>
+    <circle cx="205" cy="40" r="2.5" fill="#c2362a"/>
+    <text x="210" y="44" fill="#d97847" font-family="JetBrains Mono" font-size="7" letter-spacing="0.15em">1929 m</text>
+    <!-- 警示标 -->
+    <text x="14" y="20" fill="#c2362a" font-family="JetBrains Mono" font-size="8" font-weight="700" letter-spacing="0.2em">⚠ HIGH RISK</text>
+  </svg>
+
+  <!-- 今日推荐（JS） -->
+  <div class="today-pick" id="today">
+    <span class="tag">TODAY · 今日推荐</span>
+    <h3 id="today-name">读取中…</h3>
+    <div class="when" id="today-when"></div>
+    <p id="today-reason"></p>
+    <a id="today-link" href="#routes">▸ 跳转线路详情</a>
+  </div>
+
+  <div class="cover-meta">
+    <div>
+      <span class="lab">Region</span>
+      <span class="val">长三角 · 皖浙赣</span>
+    </div>
+    <div>
+      <span class="lab">Routes</span>
+      <span class="val"><em>8</em> 条挑战级</span>
+    </div>
+    <div>
+      <span class="lab">Audience</span>
+      <span class="val">有 <em>2 年+</em> 户外经验</span>
+    </div>
+    <div>
+      <span class="lab">Maps</span>
+      <span class="val">Google · 百度 · 两步路</span>
+    </div>
+  </div>
+
+  <!-- 目录 -->
+  <div class="toc">
+    <div class="toc-title">目 录 · CONTENTS</div>
+    <ol>
+      <li><a href="#today"><span class="num">·</span> 今日推荐（自动）</a></li>
+      <li><a href="#how"><span class="num">01</span> 难度系统 · 速查</a></li>
+      <li><a href="#routes"><span class="num">02</span> 八条挑战级线路</a></li>
+      <li><a href="#fatal"><span class="num">03</span> 三大致命风险</a></li>
+      <li><a href="#gear"><span class="num">04</span> 装备清单（重装级）</a></li>
+      <li><a href="#protocol"><span class="num">05</span> 行前协议</a></li>
+    </ol>
+  </div>
+
+  <div class="cover-foot">江南 AI 工作小组 · 2026.04 · v.II</div>
+</section>
+
+
+<!-- ============== 01 使用说明 ============== -->
+<section id="how">
+  <div class="s-num">01 · HOW TO READ</div>
+  <h2 class="s-title">难度系统 · <em>速查</em></h2>
+  <p class="s-lede">本卷只收录 4 级（挑战）与 5 级（越野）线路。3 级及以下请见第一卷《江南徒步路书》。</p>
+
+  <h3 class="subhead">难度评级（基于 8264 户外社区共识）</h3>
+  <div class="diff-matrix">
+    <div class="l1"><span class="n">★</span>极易</div>
+    <div class="l2"><span class="n">★★</span>休闲</div>
+    <div class="l3"><span class="n">★★★</span>进阶</div>
+    <div class="l4"><span class="n">★★★★</span>挑战</div>
+    <div class="l5"><span class="n">★★★★★</span>越野</div>
+  </div>
+
+  <p style="font-size:13px;color:var(--text-soft);margin-top:16px;line-height:1.7">
+  <strong style="color:var(--orange)">4 级</strong>：单日 20—35 km，累计爬升 1500—2200 米；含野线、碎石坡、连续陡坡；需要有过 3 级线路完成经验。<br>
+  <strong style="color:#ec5e51">5 级</strong>：通常需 2—3 天重装；累计爬升 2000+ 米；含手脚并用攀爬、迷路高风险路段、补给点稀少；<strong>需 2 年以上户外经验，独行者勿入</strong>。
+  </p>
+
+  <!-- 极简数据展示 -->
+  <div class="hero-stats">
+    <div class="label">⊙ 八条挑战线路 · 数据概览</div>
+    <div class="grid">
+      <div class="item">
+        <div class="num">8<em>条</em></div>
+        <div class="lab">挑战级路线</div>
+      </div>
+      <div class="item">
+        <div class="num">2,128<em>m</em></div>
+        <div class="lab">最高海拔</div>
+      </div>
+      <div class="item">
+        <div class="num">85<em>km</em></div>
+        <div class="lab">最长穿越</div>
+      </div>
+      <div class="item">
+        <div class="num">5,000<em>m</em></div>
+        <div class="lab">最大累爬</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subhead">速查 · 8 条线路</h3>
+  <table class="qt">
+    <thead>
+      <tr><th>线路</th><th>距离</th><th>爬升</th><th>天</th><th>级</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="#r-qingliang">清凉峰南北线</a></td>
+        <td class="km">22 km</td>
+        <td class="km">1,500 m</td>
+        <td class="km">1—2</td>
+        <td class="lvl4">★★★★</td>
+      </tr>
+      <tr>
+        <td><a href="#r-huihang-full">徽杭古道全线 + 清凉峰</a></td>
+        <td class="km">35 km</td>
+        <td class="km">2,000 m</td>
+        <td class="km">2</td>
+        <td class="lvl4">★★★★</td>
+      </tr>
+      <tr>
+        <td><a href="#r-sanjian">浙西三尖（太子尖—童公尖）</a></td>
+        <td class="km">32 km</td>
+        <td class="km">2,300 m</td>
+        <td class="km">2</td>
+        <td class="lvl4">★★★★</td>
+      </tr>
+      <tr>
+        <td><a href="#r-guniu">牯牛降主峰穿越</a></td>
+        <td class="km">25 km</td>
+        <td class="km">1,800 m</td>
+        <td class="km">2</td>
+        <td class="lvl4">★★★★</td>
+      </tr>
+      <tr>
+        <td><a href="#r-qijian">七尖（华东第二虐）</a></td>
+        <td class="km">50 km</td>
+        <td class="km">3,600 m</td>
+        <td class="km">2—3</td>
+        <td class="lvl5">★★★★★</td>
+      </tr>
+      <tr>
+        <td><a href="#r-wugong">武功山反穿（重装）</a></td>
+        <td class="km">36 km</td>
+        <td class="km">2,400 m</td>
+        <td class="km">2—3</td>
+        <td class="lvl5">★★★★★</td>
+      </tr>
+      <tr>
+        <td><a href="#r-jiuhua">九华山野线</a></td>
+        <td class="km">28 km</td>
+        <td class="km">2,100 m</td>
+        <td class="km">2</td>
+        <td class="lvl5">★★★★★</td>
+      </tr>
+      <tr>
+        <td><a href="#r-qianba">千八（华东第一虐）</a></td>
+        <td class="km">47 km</td>
+        <td class="km">5,000 m</td>
+        <td class="km">3</td>
+        <td class="lvl5">★★★★★</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:11.5px;color:var(--text-mute);font-style:italic;margin-top:14px;line-height:1.6">
+  数据来自 8264 户外社区《长三角徒步线路推荐》、两步路实测轨迹众数、知乎专业领队攻略。<br>
+  累计爬升因实际穿越路线略有差异，<strong>±10%</strong> 范围内属正常。
+  </p>
+</section>
+
+
+<!-- ============== 02 路线 ============== -->
+<section id="routes">
+  <div class="s-num">02 · 8 ROUTES</div>
+  <h2 class="s-title">八条<em>挑战级</em>线路</h2>
+  <p class="s-lede">从最容易的 4 级清凉峰，到华东第一虐千八。每条线都标注了关键的补给点、撤退点和事故记录。</p>
+
+
+<!-- ───── 路线 1: 清凉峰 ───── -->
+<div class="route t4" id="r-qingliang">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">浙皖 · 临安 / 绩溪</span>
+      <span class="level">LV.4</span>
+    </div>
+    <h3 class="r-name">清凉峰</h3>
+    <div class="r-alias">QING-LIANG · 1,787 m · 杭州最高峰</div>
+    <p class="r-quote">天目山脉之巅，一脚踏三省（浙皖），晴日北望黄山，南眺富春。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">海拔</span><span class="val warn">1,787 m</span></div>
+    <div><span class="lab">距离</span><span class="val">22 km</span></div>
+    <div><span class="lab">爬升</span><span class="val">~1,500 m</span></div>
+    <div><span class="lab">用时</span><span class="val">1—2 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">中</span></div>
+    <div><span class="lab">补给</span><span class="val">仅 2 处</span></div>
+    <div><span class="lab">信号</span><span class="val">山顶弱</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线（南线轻装一日）</h4>
+    <div class="trail">
+      龙塘山保护站 → 鸬鹚岭 → <strong>千顷塘</strong> → 雷打岭 → 清凉峰主峰 → 原路返
+    </div>
+
+    <h4>看点</h4>
+    <p>临安、绩溪、歙县三地界山，浙江与安徽分界岭，国家级自然保护区。山顶有大面积高山草甸，5 月有野生杜鹃，11 月有金秋红叶。"千顷塘"是亚高山泥炭沼泽，国内罕见生境。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>自驾</dt><dd>导航"龙塘山保护站"，从临安西约 1.5 h；上海出发约 4.5 h</dd>
+      <dt>门票</dt><dd>免费，但保护区内须登记备案，<strong>禁止野营生火</strong></dd>
+      <dt>最佳</dt><dd><strong>5 月杜鹃</strong>、10—11 月秋色；冬季有雪不建议</dd>
+      <dt>方向</dt><dd>南线（浙江侧）单日 22 km；北线（安徽伏岭）需两日</dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点</h5>
+      <p>千顷塘以上为亚高山草甸，<strong>无遮蔽</strong>，雷雨天易遭雷击；天气剧变常见；近年有两起失温事件，均发生在 4-5 月与 10-11 月的"温度反差日"。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：龙塘山保护站（起点）、千顷塘（半程）。山顶以北无可撤退点直至安徽侧伏岭，约 18 km。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E6%B8%85%E5%87%89%E5%B3%B0%E8%87%AA%E7%84%B6%E4%BF%9D%E6%8A%A4%E5%8C%BA%E4%B8%B4%E5%AE%89" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E6%B8%85%E5%87%89%E5%B3%B0%E8%87%AA%E7%84%B6%E4%BF%9D%E6%8A%A4%E5%8C%BA&region=%E6%9D%AD%E5%B7%9E%E4%B8%B4%E5%AE%89&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E6%B8%85%E5%87%89%E5%B3%B0.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'清凉峰')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── 路线 2: 徽杭古道全线 ───── -->
+<div class="route t4" id="r-huihang-full">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">皖南 · 绩溪 / 临安</span>
+      <span class="level">LV.4</span>
+    </div>
+    <h3 class="r-name">徽杭古道全线 + 清凉峰</h3>
+    <div class="r-alias">HUI-HANG · 35 km · 千年商道</div>
+    <p class="r-quote">古道精华段约 16 km；扩展至清凉峰则成为皖浙界山的经典长穿。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">海拔</span><span class="val warn">1,787 m</span></div>
+    <div><span class="lab">距离</span><span class="val">35 km</span></div>
+    <div><span class="lab">爬升</span><span class="val">~2,000 m</span></div>
+    <div><span class="lab">用时</span><span class="val">2 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">中</span></div>
+    <div><span class="lab">补给</span><span class="val">3 处</span></div>
+    <div><span class="lab">信号</span><span class="val">蓝天凹后弱</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线（D1 + D2 重装）</h4>
+    <div class="trail">
+      <strong>D1</strong>：绩溪鱼川 → 江南第一关 → 黄茅培村 → 下雪堂 → <strong>蓝天凹</strong>（露营 1100 m）<br>
+      <strong>D2</strong>：蓝天凹 → 野猪堂 → <strong>清凉峰主峰</strong> → 原路返蓝天凹 → 永来 → 浙基田
+    </div>
+
+    <h4>看点</h4>
+    <p>建于唐代，徽商运盐入浙必经之道，长约 16 公里的古驿道是华东最完整的明清古道遗存之一。江南第一关为悬崖凿石栈道；蓝天凹海拔 1,100 m 是天然垭口营地，可看星空；清凉峰登顶为整个穿越的最高点。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>高铁</dt><dd>苏锡常 → 黄山北或绩溪北（3 h），绩溪北转农村班车至江南村</dd>
+      <dt>门票</dt><dd>江南第一关 65 元；清凉峰段免费</dd>
+      <dt>最佳</dt><dd>4 月油菜、5 月杜鹃、10—11 月红枫</dd>
+      <dt>住宿</dt><dd>蓝天凹农家或自带帐篷露营</dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点</h5>
+      <p>江南第一关栈道<strong>雨后湿滑</strong>，每年都有滑倒摔伤事件；蓝天凹后路况转入野线，<strong>雾天易迷路</strong>；清凉峰冬季积雪结冰严重不建议攀登。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：江南第一关（起点附近）、黄茅培村、蓝天凹农家。蓝天凹之后无撤退点直至浙基田。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%BE%BD%E6%9D%AD%E5%8F%A4%E9%81%93%E6%B1%9F%E5%8D%97%E7%AC%AC%E4%B8%80%E5%85%B3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E5%BE%BD%E6%9D%AD%E5%8F%A4%E9%81%93%E6%B1%9F%E5%8D%97%E7%AC%AC%E4%B8%80%E5%85%B3&region=%E7%BB%A9%E6%BA%AA&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E5%BE%BD%E6%9D%AD%E5%8F%A4%E9%81%93%E6%B8%85%E5%87%89%E5%B3%B0.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'徽杭古道清凉峰重装')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── 路线 3: 浙西三尖 ───── -->
+<div class="route t4" id="r-sanjian">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">浙西 · 临安 / 安吉</span>
+      <span class="level">LV.4</span>
+    </div>
+    <h3 class="r-name">浙西三尖</h3>
+    <div class="r-alias">SAN-JIAN · 太子尖 — 百丈岭 — 童公尖</div>
+    <p class="r-quote">全程山脊线行走，海拔 1,400 m+ 山峰逾 10 座，云海雾瀑常伴。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">海拔</span><span class="val warn">1,558 m</span></div>
+    <div><span class="lab">距离</span><span class="val">32 km</span></div>
+    <div><span class="lab">爬升</span><span class="val">~2,300 m</span></div>
+    <div><span class="lab">用时</span><span class="val">2 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">少</span></div>
+    <div><span class="lab">补给</span><span class="val">2 处</span></div>
+    <div><span class="lab">信号</span><span class="val">山脊较好</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线</h4>
+    <div class="trail">
+      D1：临目乡 → <strong>太子尖</strong>（1,558 m）→ 防火带山脊 → 百丈岭营地<br>
+      D2：百丈岭 → 千顷田 → <strong>童公尖</strong>（1,558 m）→ 安吉龙王山林场
+    </div>
+
+    <h4>看点</h4>
+    <p>浙西北经典徒步线，全程山脊线，视野开阔，景色豪放。秋季草甸金黄，冬季有雾凇雾瀑。三尖路段路况整体较好，但起伏多，对持续体能要求高。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>自驾</dt><dd>临安一侧从太湖源镇临目乡入山；安吉一侧从龙王山林场出</dd>
+      <dt>门票</dt><dd>免费，但需联系当地农家包车接驳（150—200 元/车）</dd>
+      <dt>最佳</dt><dd><strong>10—11 月秋色</strong>、12 月雾凇</dd>
+      <dt>住宿</dt><dd>百丈岭无客栈，<strong>必须自带帐篷</strong>；亦可下撤至千顷田找农家</dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点</h5>
+      <p>山脊线<strong>无水源</strong>，2L 水仅够一日；冬季山顶大风，温度可比山下低 15℃；夏季雷暴多，山脊无遮蔽。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：百丈岭可下撤至临安藻溪乡或安吉马铃岗。两个尖峰之间无撤退路。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E6%B5%99%E8%A5%BF%E4%B8%89%E5%B0%96%E5%A4%AA%E5%AD%90%E5%B0%96" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E5%A4%AA%E5%AD%90%E5%B0%96%E4%B8%B4%E5%AE%89&region=%E6%9D%AD%E5%B7%9E&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E6%B5%99%E8%A5%BF%E4%B8%89%E5%B0%96.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'浙西三尖太子尖童公尖')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── 路线 4: 牯牛降 ───── -->
+<div class="route t4" id="r-guniu">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">皖南 · 祁门 / 石台</span>
+      <span class="level">LV.4</span>
+    </div>
+    <h3 class="r-name">牯牛降主峰穿越</h3>
+    <div class="r-alias">GU-NIU-JIANG · 西黄山 · 1,728 m</div>
+    <p class="r-quote">"古称西黄山"，黄山山脉向西延伸主体；以雄、奇、险著称。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">海拔</span><span class="val warn">1,728 m</span></div>
+    <div><span class="lab">距离</span><span class="val">25 km</span></div>
+    <div><span class="lab">爬升</span><span class="val">~1,800 m</span></div>
+    <div><span class="lab">用时</span><span class="val">2 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">多</span></div>
+    <div><span class="lab">补给</span><span class="val">仅 1 处</span></div>
+    <div><span class="lab">信号</span><span class="val">主峰段无</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线</h4>
+    <div class="trail">
+      D1：祁门历溪村 → 望江台 → 双龙谷 → <strong>牯牛降主峰营地</strong><br>
+      D2：主峰 → 灵山景区 → 龙门景区 → 石台县
+    </div>
+
+    <h4>看点</h4>
+    <p>境内有 36 大峰、72 小峰；以雄奇险峻著称，山形似牯牛从天而降。原始森林保存完好，国家级自然保护区。可贯穿祁门、石台两县。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>自驾</dt><dd>祁门一侧导航"历溪村"；石台一侧导航"牯牛降景区"</dd>
+      <dt>门票</dt><dd>景区段 90 元；穿越段免费但<strong>需向保护区报备</strong></dd>
+      <dt>最佳</dt><dd>10—11 月红叶、4—5 月杜鹃</dd>
+      <dt>注意</dt><dd>核心区禁止野营生火；近年管理趋严</dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点</h5>
+      <p>主峰段为<strong>未开发野线</strong>，岔路多，2018 年起多次发生驴友迷路事件；竹叶青蛇活跃于 5—10 月；信号盲区长达 8 km。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：望江台（D1 中段）、双龙谷农家（仅夏季营业）。一旦上主峰，必须完成穿越或原路返回。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E7%89%AF%E7%89%9B%E9%99%8D%E9%A3%8E%E6%99%AF%E5%8C%BA" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E7%89%AF%E7%89%9B%E9%99%8D%E9%A3%8E%E6%99%AF%E5%8C%BA&region=%E9%BB%84%E5%B1%B1&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E7%89%AF%E7%89%9B%E9%99%8D.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'牯牛降穿越')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── 路线 5: 七尖 ───── -->
+<div class="route t5" id="r-qijian">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">浙西 · 临安</span>
+      <span class="level l5">LV.5</span>
+    </div>
+    <h3 class="r-name">七尖（华东第二虐）</h3>
+    <div class="r-alias">SEVEN PEAKS · 仙人顶—大仙顶 · 50 km</div>
+    <p class="r-quote">天目山脉七座主峰连穿，号称华东第二虐。成功穿越者被驴友圈认证为"强驴"。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">最高峰</span><span class="val crit">1,587 m</span></div>
+    <div><span class="lab">距离</span><span class="val">50 km</span></div>
+    <div><span class="lab">爬升</span><span class="val crit">~3,600 m</span></div>
+    <div><span class="lab">用时</span><span class="val">2—3 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">极多</span></div>
+    <div><span class="lab">补给</span><span class="val">仅 2 处</span></div>
+    <div><span class="lab">信号</span><span class="val">大段无</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线（西东穿越，3 日重装）</h4>
+    <div class="trail">
+      <strong>D1</strong>：西天目 → 仙人顶（1,506 m）→ <strong>龙王山</strong>（1,587 m，最高）→ 龙王山山腰营地<br>
+      <strong>D2</strong>：药王峰（1,551 m）→ 千亩峰（1,554 m）→ 桐坑岗（1,503 m）→ 檀树岗营地<br>
+      <strong>D3</strong>：仰天坪（1,248 m）→ 仙人台 → <strong>大仙顶</strong>（1,479 m，东天目）→ 下山
+    </div>
+
+    <h4>看点</h4>
+    <p>实际为九座山峰连穿，沿天目山脉主脊线行走。沿线有亚高山针阔混交林、高山草甸、岩石带，地貌变化丰富。龙王山顶可"一脚跨临安、安吉、宁国三地"。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>自驾</dt><dd>导航"西天目山龙凤竹农家乐"，老板可包车接送至上山口</dd>
+      <dt>门票</dt><dd>非景区路段免费；西/东天目景区另购票</dd>
+      <dt>最佳</dt><dd><strong>4 月（避雷雨）</strong>、10 月（必选晴日）</dd>
+      <dt>装备</dt><dd>重装包 15—23 kg；GPS 必备；2 升以上水袋</dd>
+      <dt>同伴</dt><dd>3 人以上，<strong>建议有领队</strong></dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点 · 重要</h5>
+      <p><strong>千亩峰下坡是技术段</strong>，雨雪天强烈建议绕行（有岔路），曾发生多起摔伤；茅草村补给已不固定，深王公路护林站已不接近，<strong>原 5 处补给只剩 2 处可靠</strong>；岔路多，无 GPS 几乎必迷路。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：龙王山山腰可下撤至临安西天目；千亩峰下可走深王公路下撤至安吉；其他段无撤退路。<strong>檀树岗到山下机耕路约 8 km</strong>。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E5%A4%A9%E7%9B%AE%E5%B1%B1%E4%BB%99%E4%BA%BA%E9%A1%B6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E8%A5%BF%E5%A4%A9%E7%9B%AE%E5%B1%B1&region=%E6%9D%AD%E5%B7%9E%E4%B8%B4%E5%AE%89&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E4%B8%83%E5%B0%96%E7%A9%BF%E8%B6%8A.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'七尖穿越天目山')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── 路线 6: 武功山 ───── -->
+<div class="route t5" id="r-wugong">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">江西 · 萍乡 / 宜春</span>
+      <span class="level l5">LV.5</span>
+    </div>
+    <h3 class="r-name">武功山反穿（重装）</h3>
+    <div class="r-alias">WU-GONG · 1,918 m · 云中草原</div>
+    <p class="r-quote">华东徒步天花板。十万亩高山草甸，云海星空，亦有 2024 年驴友失温遇难记录。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">海拔</span><span class="val crit">1,918 m</span></div>
+    <div><span class="lab">距离</span><span class="val">36 km</span></div>
+    <div><span class="lab">爬升</span><span class="val crit">~2,400 m</span></div>
+    <div><span class="lab">用时</span><span class="val">2—3 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">多</span></div>
+    <div><span class="lab">补给</span><span class="val">客栈密集</span></div>
+    <div><span class="lab">信号</span><span class="val">弱且断续</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线（龙山村反穿正穿，2—3 日）</h4>
+    <div class="trail">
+      <strong>D1</strong>：龙山村 → 发云界（1,628 m，海拔 +1,300 m）→ 客栈营地<br>
+      <strong>D2</strong>：发云界 → 千丈岩 → 好汉坡 → <strong>绝望坡</strong>（70° 陡坡，+400 m）→ 吊马桩 → <strong>金顶</strong>（1,918 m）<br>
+      <strong>D3</strong>：金顶 → 沈子村下山
+    </div>
+
+    <h4>看点</h4>
+    <p>世界地质公园，全球唯一以花岗岩穹隆构造为主体的地质公园。十万亩高山草甸、云海日出、星空银河。发云界至吊马桩 10 km 高山草甸为精华段，被《国家地理》称为"云中草原"。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>高铁</dt><dd>苏锡常 → 南昌 → 萍乡北（约 5 h）；萍乡北包车至龙山村或沈子村约 1.5 h</dd>
+      <dt>门票</dt><dd>反穿龙山村线路免景区门票，<strong>仅收环境卫生费 10 元</strong>；正穿沈子村过节收 70 元</dd>
+      <dt>最佳</dt><dd>4—5 月草甸返绿、9—10 月秋色、雪后冬季；<strong>避开 6—7 月雷雨季</strong></dd>
+      <dt>住宿</dt><dd>沿线客栈密集（白鹤峰、发云界、武发等），15 元泡面、35 元起炒菜</dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点 · 致命级</h5>
+      <p><strong>失温！</strong>2024 年 5 月一名 97 年女生在武功山风雨中失温遇难。海拔 1,600 m+ 区域<strong>全年约 200 天有云雾</strong>，温度可比山下低 15°C；好汉坡 70° 陡坡需手脚并用，雨后湿滑致命；<strong>绝望坡</strong>连续乱石上升 400 m。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：金顶有索道下山（55 元单程，雷雨大风停运）；中庵索道下山；客栈密集，可随时停宿。<strong>但绝望坡到金顶段无撤退路</strong>。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E6%AD%A6%E5%8A%9F%E5%B1%B1%E9%87%91%E9%A1%B6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E6%AD%A6%E5%8A%9F%E5%B1%B1%E9%87%91%E9%A1%B6&region=%E8%90%8D%E4%B9%A1&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E6%AD%A6%E5%8A%9F%E5%B1%B1%E5%8F%8D%E7%A9%BF.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'武功山反穿龙山村')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── 路线 7: 九华山 ───── -->
+<div class="route t5" id="r-jiuhua">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">皖南 · 池州青阳</span>
+      <span class="level l5">LV.5</span>
+    </div>
+    <h3 class="r-name">九华山野线穿越</h3>
+    <div class="r-alias">JIU-HUA · 十王峰 · 1,342 m</div>
+    <p class="r-quote">中国佛教四大名山之一，但驴友走的是远离香客的野线，"野路较多，荆棘小竹林较多"。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">海拔</span><span class="val crit">1,342 m</span></div>
+    <div><span class="lab">距离</span><span class="val">28 km</span></div>
+    <div><span class="lab">爬升</span><span class="val crit">~2,100 m</span></div>
+    <div><span class="lab">用时</span><span class="val">2 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">极多</span></div>
+    <div><span class="lab">补给</span><span class="val">寺庙不可靠</span></div>
+    <div><span class="lab">信号</span><span class="val">山顶有/野线无</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线</h4>
+    <div class="trail">
+      D1：青阳柯村 → 后山野径 → <strong>十王峰</strong>（最高峰）→ 天台峰 → 古佛堂营地<br>
+      D2：古佛堂 → 闵园 → 慧居寺 → 九华街 → 山下
+    </div>
+
+    <h4>看点</h4>
+    <p>避开热门香客路线，从后山野径接近主峰。荆棘竹林路段、悬崖横切、原始森林皆有。山顶天台寺为 4A 景区核心，但驴友更看重沿途寺庙间的野径风光。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>高铁</dt><dd>苏锡常 → 池州站（约 3 h）→ 转车至青阳</dd>
+      <dt>门票</dt><dd>从九华街进收 160 元；从柯村野线进入免费</dd>
+      <dt>最佳</dt><dd>10—11 月、4 月；夏季蛇虫极多</dd>
+      <dt>装备</dt><dd>必带长袖（防荆棘）、镰刀（开路）</dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点</h5>
+      <p>野径荆棘密布，<strong>无明显路迹</strong>，每年雨季后驴友迷路事件频发；竹林段方向感差；<strong>毒蛇竹叶青、蝮蛇活跃</strong>于 4—10 月；天台峰附近悬崖横切有跌落风险。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：九华街景区（D2 中段）有缆车下山；闵园有班车至山下。野径段无撤退点。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E4%B9%9D%E5%8D%8E%E5%B1%B1%E5%8D%81%E7%8E%8B%E5%B3%B0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E4%B9%9D%E5%8D%8E%E5%B1%B1%E9%A3%8E%E6%99%AF%E5%8C%BA&region=%E6%B1%A0%E5%B7%9E&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E4%B9%9D%E5%8D%8E%E5%B1%B1%E7%A9%BF%E8%B6%8A.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'九华山野线穿越')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ───── 路线 8: 千八 ───── -->
+<div class="route t5" id="r-qianba">
+  <div class="r-head">
+    <div class="r-tag">
+      <span class="left">浙江 · 龙泉</span>
+      <span class="level l5">LV.5</span>
+    </div>
+    <h3 class="r-name">千八（华东第一虐）</h3>
+    <div class="r-alias">QIAN-BA · 黄茅尖 · 1,929 m · 浙江第一高峰</div>
+    <p class="r-quote">华东徒步圈最高难度认证。完整大环线 85 km，传统线 47 km，累计爬升超 5000 米。</p>
+  </div>
+  <div class="r-stats">
+    <div><span class="lab">海拔</span><span class="val crit">1,929 m</span></div>
+    <div><span class="lab">距离</span><span class="val">47—85 km</span></div>
+    <div><span class="lab">爬升</span><span class="val crit">~5,000 m</span></div>
+    <div><span class="lab">用时</span><span class="val">3—4 d</span></div>
+  </div>
+  <div class="r-tech">
+    <div><span class="lab">岔路</span><span class="val">极多</span></div>
+    <div><span class="lab">补给</span><span class="val">几乎无</span></div>
+    <div><span class="lab">信号</span><span class="val">长段无</span></div>
+  </div>
+  <div class="r-body">
+    <h4>路线（传统线 47 km，3 日重装）</h4>
+    <div class="trail">
+      <strong>D1</strong>：龙泉凤阳山保护站 → 凤阳湖 → <strong>黄茅尖</strong>（1,929 m，浙江第一高峰）→ 山腰营地<br>
+      <strong>D2</strong>：山脊穿越（多个 1700 m+ 山峰）→ 大坑营地<br>
+      <strong>D3</strong>：百山祖（1,857 m）→ 出山
+    </div>
+
+    <h4>看点</h4>
+    <p>洞宫山脉最高峰，浙江省最高峰。完整穿越凤阳山—百山祖国家级自然保护区。原始森林、高山湿地、浙南野生动物（含国家级保护物种）。是华东驴友圈"完成即封神"的终极挑战。</p>
+
+    <h4>抵达 · 季节 · 注意</h4>
+    <dl class="kv">
+      <dt>到达</dt><dd>苏锡常 → 温州或丽水 → 龙泉市（高铁约 6 h），转包车至凤阳山保护站</dd>
+      <dt>门票</dt><dd>保护区核心区<strong>原则上禁止穿越</strong>，需向保护站报备，每年仅特定时段开放</dd>
+      <dt>最佳</dt><dd>仅 4—5 月、10—11 月可行；其他月份禁穿</dd>
+      <dt>装备</dt><dd>专业重装包 18+ kg、卫星电话、专业急救包；帐篷、炉头必备</dd>
+      <dt>同伴</dt><dd>必须 4 人以上，有领队，<strong>建议聘请当地向导（800—1500 元/天）</strong></dd>
+    </dl>
+
+    <div class="r-risk">
+      <h5>⚠ 风险点 · 极致命</h5>
+      <p>这是华东最难线路。<strong>无成熟营地、无补给点、无救援</strong>；保护区原始路况差，倒木、断崖、深沟极多；<strong>2018—2024 年间累计 4 起死亡事故</strong>（含独行驴友失踪未寻回）；夏季毒虫、毒蛇、蚂蟥密集；<strong>无 GPS + 卫星电话不要进入</strong>。</p>
+    </div>
+
+    <div class="bailout">
+      <strong>撤退点</strong>：仅起点凤阳山保护站、终点百山祖保护站。中段无撤退路，<strong>一旦进入不可逆</strong>。
+    </div>
+
+    <div class="r-actions">
+      <a class="btn gmap" href="https://www.google.com/maps/search/?api=1&query=%E5%87%A4%E9%98%B3%E5%B1%B1%E9%BB%84%E8%8C%85%E5%B0%96" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">Google</span><span class="en">MAP</span></a>
+      <a class="btn bmap" href="https://api.map.baidu.com/place/search?query=%E5%87%A4%E9%98%B3%E5%B1%B1%E5%9B%BD%E5%AE%B6%E7%BA%A7%E8%87%AA%E7%84%B6%E4%BF%9D%E6%8A%A4%E5%8C%BA&region=%E9%BE%99%E6%B3%89&output=html&src=webapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg><span class="cn">百度</span><span class="en">MAP</span></a>
+      <a class="btn gpx" href="https://www.2bulu.com/track/search-%E5%8D%83%E5%85%AB%E7%A9%BF%E8%B6%8A.htm" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 11.5l4.5-4.5 7 7-1.5 1.5-5.5-5.5-3 3L4 7.5 5.5 6l3.5 5.5zM3 18h18v2H3z"/></svg><span class="cn">两步路轨迹</span><span class="en">2BULU</span></a>
+      <button class="btn cp" onclick="copyKw(this,'千八穿越黄茅尖凤阳山')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v14a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 16H8V7h11v14z"/></svg><span class="cn">复制·App 内搜</span><span class="en">2BULU APP</span></button>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+<!-- ============== 03 三大致命风险 ============== -->
+<section id="fatal">
+  <div class="s-num">03 · FATAL RISKS</div>
+  <h2 class="s-title">三大<em>致命</em>风险</h2>
+  <p class="s-lede">不是吓人，是数据。这三类事故占华东户外死亡事件的 90%，每年都在重复发生。</p>
+
+  <div class="fatal-grid">
+    <div class="fatal">
+      <h4><span class="icon">❄</span>失温</h4>
+      <div class="stat">2024 武功山事件 · 97 年女生遇难</div>
+      <p>身体核心温度低于 35°C 即为失温。在<strong>湿+风+体能透支</strong>三重作用下，10°C 的环境也能在 30 分钟内致死。江南山区春秋温差大、雷雨多，<strong>失温是头号杀手</strong>。</p>
+      <div class="key">
+        <strong>识别</strong>：剧烈颤抖→停止颤抖→意识混乱→昏迷。一旦停止颤抖即为重度失温。<br>
+        <strong>预防</strong>：冲锋衣（防风+雨）、抓绒中层、速干内层；湿衣立即换；高糖+热饮持续补给。<br>
+        <strong>处理</strong>：立即脱湿衣→干衣裹睡袋→热饮（不含酒精）→拨救援（120/119）。
+      </div>
+    </div>
+
+    <div class="fatal">
+      <h4><span class="icon">🌫</span>迷路 · 失联</h4>
+      <div class="stat">千八、牯牛降、九华山野线高发</div>
+      <p>江南植被茂密，<strong>雾天可视距离不足 5 米</strong>。岔路一错，越走越偏，体力消耗倍增。GPS 没电、信号丢失、单人独行——任意一项都可能升级为失联事故。</p>
+      <div class="key">
+        <strong>预防</strong>：两步路或六只脚下载离线 GPX 轨迹；备充电宝（10000 mAh+）；3 人以上结伴；告知家人详细行程。<br>
+        <strong>迷路</strong>：原地不动 → 沿来时痕迹返回（不要"自信地前进"）→ 高地点找信号 → 拨 119 报地标 → 用哨子或对讲求救。
+      </div>
+    </div>
+
+    <div class="fatal">
+      <h4><span class="icon">⚡</span>雷击 · 滑坠</h4>
+      <div class="stat">夏季山脊线、雨后陡坡</div>
+      <p>清凉峰、浙西三尖、武功山的高山草甸均为<strong>雷暴敏感区</strong>。山脊毫无遮蔽，常见击中树木乃至人体。雨后陡坡（绝望坡、好汉坡）滑坠也是高发事件。</p>
+      <div class="key">
+        <strong>雷暴</strong>：远离金属、登山杖；蹲低身体，双脚并拢；远离孤树、山顶；进入山谷或密林。<br>
+        <strong>滑坠</strong>：陡坡用登山杖三点支撑；雨后碎石坡绕行；下坡比上坡危险——节奏放慢，<strong>下山每一步都看好落点</strong>。
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== 04 装备清单 ============== -->
+<section id="gear">
+  <div class="s-num">04 · GEAR · HEAVY</div>
+  <h2 class="s-title">装备<em>清单</em>（重装级）</h2>
+  <p class="s-lede">挑战级线路装备容错率为零。少带一件冲锋衣，可能就是失温。多带 500g 糖，可能就是救命。</p>
+
+  <div class="gear-cat must">
+    <h4>核心 · 不可妥协 <span class="badge">CORE</span></h4>
+    <ul>
+      <li><strong>冲锋衣 + 抓绒</strong>：Gore-Tex 或同级膜，绝不能用聚酯雨衣替代</li>
+      <li><strong>登山鞋（中帮）</strong>：保护脚踝；新鞋必须先穿 50 km 磨合，否则磨血泡</li>
+      <li><strong>登山杖一对</strong>：下坡省 30% 膝盖压力</li>
+      <li><strong>头灯 + 备用电池</strong>：单灯不可，必须备份；夜间下山唯一光源</li>
+      <li><strong>充电宝 10,000 mAh+</strong>：手机 + GPS + 头灯共用电量</li>
+      <li><strong>个人医疗包</strong>：止血绷带、消毒液、镇痛药、防过敏药、保温毯（铝箔）</li>
+      <li><strong>水袋 2L+ + 净水器</strong>：山溪水须过滤；夏季每人每日 3L 起</li>
+      <li><strong>高能量行动粮</strong>：能量胶、巧克力、葡萄干；正餐外另备 800 大卡应急量</li>
+    </ul>
+  </div>
+
+  <div class="gear-cat">
+    <h4>重装升级 · 5 级必带 <span class="badge">5★</span></h4>
+    <ul>
+      <li><strong>专业登山包 50—70 L</strong>：腰带必须能承重，肩带不可</li>
+      <li><strong>三季帐 / 高山帐</strong>：4 季帐通常用不到，但需考虑大风地区</li>
+      <li><strong>睡袋（舒适温度比预测最低气温低 5°C）</strong>：羽绒比棉花轻一倍</li>
+      <li><strong>防潮垫</strong>：充气式 R 值≥3（武功山、七尖山顶冷）</li>
+      <li><strong>炉头 + 气罐</strong>：营地热饮和热食是失温最佳预防</li>
+      <li><strong>对讲机一对</strong>：3 人以上队伍前后联络</li>
+      <li><strong>GPS 设备 / 手机</strong>：两步路 / 六只脚 / 奥维互动地图，提前下载离线包</li>
+    </ul>
+  </div>
+
+  <div class="gear-cat cond">
+    <h4>条件性装备 <span class="badge">SEASONAL</span></h4>
+    <ul>
+      <li><strong>夏季</strong>：盐丸（20+ 颗）、防蚊液（DEET 30%+）、蛇药、藿香正气水</li>
+      <li><strong>春秋</strong>：备用棉手套、抓绒帽（夜营必用）</li>
+      <li><strong>冬季</strong>：羽绒服、雪套、冰爪（武功山、千八雪后必备）</li>
+      <li><strong>5 级路线</strong>：卫星电话或卫星信号设备（千八必带）；急救哨</li>
+      <li><strong>专业向导联系</strong>：千八、牯牛降建议聘请当地向导</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============== 05 行前协议 ============== -->
+<section id="protocol">
+  <div class="s-num">05 · PRE-DEPARTURE</div>
+  <h2 class="s-title">行前<em>协议</em></h2>
+  <p class="s-lede">认真完成下面 10 步，能让你的存活率提升 90%。这不是口号。</p>
+
+  <div style="background:var(--bg-card);border:1px solid var(--line);padding:18px 16px;margin-top:16px">
+    <ol style="margin:0;padding-left:22px;font-size:13.5px;line-height:1.85;color:var(--text-soft)">
+      <li><strong style="color:var(--orange)">出发 7 天前</strong>：确认线路、查阅近 1 年内同月份事故记录</li>
+      <li><strong style="color:var(--orange)">出发 3 天前</strong>：天气趋势查看（彩云天气 / 风云天气）；雨日窗口期判断</li>
+      <li><strong style="color:var(--orange)">出发 1 天前</strong>：装备清单逐项核对；下载离线 GPX 轨迹；充满所有电池</li>
+      <li><strong style="color:var(--orange)">出发当晚</strong>：把详细行程（含轨迹截图、入山点、预计出山时间、紧急联系人）发给至少 2 位家人/朋友</li>
+      <li><strong style="color:var(--orange)">入山前</strong>：现场再核对天气；登记保护区（如适用）；检查队伍每人体能状态</li>
+      <li><strong style="color:var(--blood)">入山中 · 持续</strong>：每 1 小时检查一次手机电量；每 30 分钟整队点名；遇雨立即决定继续或撤退</li>
+      <li><strong style="color:var(--blood)">异常时</strong>：任一队员体力透支、负伤、身体不适，<strong>立即整队下撤</strong>，不可"再走一段看看"</li>
+      <li><strong style="color:var(--blood)">迷路时</strong>：原地不动，标注最后 GPS 点位；用对讲、哨子、电话联络；切勿独行返回</li>
+      <li><strong style="color:var(--blood)">遇险时</strong>：拨 119（消防主管山地救援）→ 报清线路名 + 最近 GPS + 队伍人数 + 现场状况</li>
+      <li><strong style="color:var(--blood)">出山后</strong>：第一时间向家人朋友报平安；记录线路实际数据，反馈两步路</li>
+    </ol>
+  </div>
+
+  <div style="margin-top:24px;padding:18px;background:rgba(217,120,71,0.08);border-left:3px solid var(--orange);font-size:12.5px;line-height:1.65;color:var(--text-soft)">
+    <strong style="color:var(--orange);font-size:13px">关于户外保险</strong><br>
+    挑战级线路<strong>必须购买专业户外险</strong>（不是普通旅游险）。推荐：美亚乐悠游、平安专业户外保障、安联户外救援险。年度计划约 200—500 元，单次 30—60 元，包含直升机救援的尤其推荐。
+  </div>
+</section>
+
+
+<!-- ============== 页脚 ============== -->
+<footer>
+  <div class="ft">— 山外有山 · 行者无悔 —</div>
+  <div class="fm">编于 二〇二六年四月 · CHALLENGE EDITION</div>
+
+  <p>本路书第二卷只收录 4 级（挑战）与 5 级（越野）线路，<strong>不适合新手</strong>。请确保你已经在第一卷《江南徒步路书》中走过 3 级线路，再考虑挑战本卷内容。</p>
+
+  <p>所有数据来自 8264 户外社区、两步路实测轨迹众数、专业领队公开攻略。<strong>线路条件随季节、保护区政策、天气变化</strong>，出发前必须二次核实。</p>
+
+  <div class="src">
+    <strong>主要参考来源</strong>：8264 户外社区《长三角徒步线路推荐表》、两步路户外社区（2bulu.com）、知乎《天目山七尖穿越攻略》《武功山徒步路线图全解》、少数派《武功山穿越指南》、向野行《武功山反穿龙山村线徒步攻略》、去哪儿用户实测游记、华东户外网《推荐华东十大户外徒步经典线路》。
+  </div>
+
+  <div class="copy">
+    <div class="label">© COPYRIGHT</div>
+    <div class="name">江南 AI 工作小组</div>
+    <div class="ver">JIANGNAN · AI · STUDIO &nbsp;|&nbsp; 2026.04 · v.II</div>
+    <div class="seal">挑战<br>2026</div>
+  </div>
+</footer>
+
+</main>
+
+<script>
+// ========== 复制关键字 ==========
+function copyKw(btn, kw){
+  function ok(){
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.classList.remove('copied'); }, 1800);
+  }
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(kw).then(ok).catch(function(){
+      var ta = document.createElement('textarea');
+      ta.value = kw; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); ok(); } catch(e){}
+      document.body.removeChild(ta);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = kw; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); ok(); } catch(e){ alert('请手动复制：' + kw); }
+    document.body.removeChild(ta);
+  }
+}
+
+// ========== 今日推荐 ==========
+// 数据：每月最适合的 1-2 条线路（根据季节、雨期、温度等）
+var TODAY_DATA = {
+  // 月份 (1-12) → 对应推荐
+  1:  [{name:'清凉峰南北线', id:'r-qingliang', why:'冬季清凉峰视野最通透，可见黄山雪线；选晴日；防风装备齐全'}],
+  2:  [{name:'徽杭古道全线', id:'r-huihang-full', why:'初春古道清冷无人，江南第一关石栈道无积雪后通行良好'}],
+  3:  [{name:'徽杭古道全线', id:'r-huihang-full', why:'4 月油菜花未到，3 月底蓝天凹野梅初开；天气最稳定的初春窗口'}, {name:'清凉峰南北线', id:'r-qingliang', why:'山脊草甸返绿初期；3 月底气温合适'}],
+  4:  [{name:'徽杭古道全线', id:'r-huihang-full', why:'4 月油菜花满坡，蓝天凹星空夜景最佳；古道全年最佳月'}, {name:'清凉峰南北线', id:'r-qingliang', why:'5 月杜鹃花前奏；山顶天气稳定'}],
+  5:  [{name:'清凉峰南北线', id:'r-qingliang', why:'5 月山顶野生杜鹃漫山，浙西第一花海；千顷塘倒影最美'}, {name:'七尖（华东第二虐）', id:'r-qijian', why:'4-5 月避雷雨高峰、避酷暑，是七尖最佳穿越窗口'}],
+  6:  [{name:'武功山反穿（重装）', id:'r-wugong', why:'梅雨季草甸返绿，云海概率高；但需严选晴日，6 月失温事故高发'}],
+  7:  [{name:'武功山反穿（重装）', id:'r-wugong', why:'高海拔避暑，山顶夜温 18°C；但需避开雷暴日'}],
+  8:  [{name:'武功山反穿（重装）', id:'r-wugong', why:'8 月星空、银河、云海三连；高海拔避暑首选'}],
+  9:  [{name:'七尖（华东第二虐）', id:'r-qijian', why:'9 月秋高气爽，七尖最佳月；山脊视野百公里'}, {name:'浙西三尖', id:'r-sanjian', why:'秋季云海多发，山脊行走成就感拉满'}],
+  10: [{name:'七尖（华东第二虐）', id:'r-qijian', why:'10 月秋色顶峰；前提是天气稳定（连续 3 天晴）'}, {name:'武功山反穿（重装）', id:'r-wugong', why:'10 月草甸金黄，国庆人多需提前订营地'}, {name:'千八（华东第一虐）', id:'r-qianba', why:'10 月是千八全年仅有的开放窗口之一；需提前申请'}, {name:'九华山野线穿越', id:'r-jiuhua', why:'10 月寒露过后，蛇虫减少，野线安全度提升；秋色山寺最美'}],
+  11: [{name:'浙西三尖', id:'r-sanjian', why:'11 月雾凇雾瀑首发月；山脊金黄草甸最美'}, {name:'牯牛降主峰穿越', id:'r-guniu', why:'11 月红叶巅峰；皖南秋色全年最佳'}, {name:'徽杭古道全线', id:'r-huihang-full', why:'11 月古道两侧红枫黄银杏交织'}],
+  12: [{name:'清凉峰南北线', id:'r-qingliang', why:'冬日山顶雾凇出现概率高；视野通透可俯瞰浙皖群山'}, {name:'浙西三尖', id:'r-sanjian', why:'12 月雾凇雾瀑高发月；冷风中山脊仙境'}]
+};
+
+(function(){
+  var now = new Date();
+  var m = now.getMonth() + 1; // 1-12
+  var d = now.getDate();
+  var pool = TODAY_DATA[m] || TODAY_DATA[10];
+  // 用日期做索引选一条（同一天总是同一条，不同人看到一致）
+  var idx = d % pool.length;
+  var pick = pool[idx];
+  
+  var nameEl = document.getElementById('today-name');
+  var whenEl = document.getElementById('today-when');
+  var whyEl  = document.getElementById('today-reason');
+  var lnkEl  = document.getElementById('today-link');
+  
+  if (nameEl) nameEl.textContent = pick.name;
+  if (whenEl) whenEl.textContent = '今日 · ' + (now.getMonth()+1) + ' 月 ' + d + ' 日 · ' + ['周日','周一','周二','周三','周四','周五','周六'][now.getDay()];
+  if (whyEl)  whyEl.textContent  = pick.why;
+  if (lnkEl)  lnkEl.href = '#' + pick.id;
+})();
+</script>
+
+</body>
+</html>
